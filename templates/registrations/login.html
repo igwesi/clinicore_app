@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+{% load static %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block title %}
+<title>Register</title>
+{% endblock %}
+
+
+{% block extra_css %}
+<style>
+    *{
+        color: #212529;
+    }
+    body{
+        background: #212529;
+    }
+    .brand-container{
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        text-align:center;
+        object-fit: contain;
+        & img{
+            height: 50px;
+            object-fit: contain;
+        }
+        & .text{
+            margin-top: -20px;
+        }
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-2">
+    <div class="row mb-4">
+        <div class="card col-10 col-md-6 mx-auto p-4">
+            <span class="fw-bold text-muted text-center"> -- Authentication -- </span>
+            <div class="brand-container">
+                <img 
+                    src="{% static 'svg/logo.svg' %}" 
+                    srcset="{% static 'svg/logo.svg' %}"
+                    loading="lazy"
+                    alt="Clinicore Logo" class="img-fluid d-inline-block align-text-top">
+                <h4 class="d-none">Login</h4>
+            </div>
+            <form class="mt-2" method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="w-100 btn btn-block btn-danger">
+                        Submit
+                    </button>
+                {% endbuttons %}
+            </form>
+            <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+            <p><a href="#">Forgot password?</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

@@ -30,9 +30,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise', # Static files storage
     'django.contrib.staticfiles',
     'rest_framework',
-    'whitenoise',
+    'captcha',
+    'bootstrap5',
+    
+    'core',
+    'apps.accounts',
+    'apps.clinic_app',
 ]
 
 MIDDLEWARE = [
@@ -44,9 +50,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.accounts.middleware.RoleAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
+AUTH_USER_MODEL = 'accounts.Account'
 
 TEMPLATES = [
     {
@@ -101,11 +109,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
-STATIC_FILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'plugins/static'),
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'plugins/assets')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
+
+STATIC_ROOT = BASE_DIR / 'plugins/assets'
+MEDIA_ROOT =  BASE_DIR / 'media_cdn'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

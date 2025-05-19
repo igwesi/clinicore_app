@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Clinicore</title>
+{% endblock %}
+
+
+{% block extra_css %}
+<style>
+    #main-screen{
+        margin-top:30px;
+        margin-bottom:5px;
+        height: 80vh;
+        width: auto;
+    }
+    #main-screen > div{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <div class="brand-container">
+            <img 
+                src="{% static 'svg/logo.svg' %}" 
+                srcset="{% static 'svg/logo.svg' %}"
+                loading="lazy"
+                alt="Clinicore Logo" width="auto" height="150" class="img-fluid d-inline-block align-text-top">
+            <h4 style="margin-top:-50px; font-size: 30px;" class="text-start">Welcome to the central hub for clinical operations. </h4>
+        </div>
+    </div>
+    <div class="row">
+        {% if request.user.is_authenticated %}
+        <div class="login">
+            <a href="{% url 'dashboard' %}" class="btn btn-md btn-success btn-block">
+                <span class="login-text p-3">GoPortal</span>
+            </a>
+        </div>
+        {% else %}
+        <div class="login">
+            <a href="{% url 'login' %}" class="btn btn-md btn-danger btn-block">
+                <span class="login-text p-3">Login</span>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

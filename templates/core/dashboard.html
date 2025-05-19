@@ -1,0 +1,76 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Dashboard</title>
+{% endblock %}
+
+
+{% block extra_css %}
+<style>
+    body{
+        width: 100vw;
+        height: 100vh;        
+    }
+    #main-screen{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        flex-direction: row;
+        justify-content: space-between;
+        transition: all ease-in-out .5s;
+    }
+    .navigation{
+        width: 20%;
+        display: flex;
+        align-items:center;
+        background: #212529;
+        transition: all ease-in-out .5s;
+    }
+    .body-content{
+        width: 100%;
+        position: relative;
+        transition: all ease-in-out .5s;
+    }
+    .patient_count{
+        font-size: 40px;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col">
+            <div class="card text-center">
+                <div class="fw-bold p-3"> 
+                    Staff's Count:
+                    <span class="patient_count"> {{ patient_count }}<span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center">
+                <div class="fw-bold p-3"> 
+                    Patient's Count:
+                    <span class="patient_count"> {{ patient_count }}<span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center">
+                <div class="fw-bold p-3"> 
+                    Patient's Count:
+                    <span class="patient_count"> {{ patient_count }}<span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
