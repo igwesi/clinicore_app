@@ -3,6 +3,7 @@
 set -o errexit
 echo "Installing dependencies..."
 
+pip install --upgrade pip
 pip install --upgrade -r requirements.txt
 
 echo "DATABASE MIGRATIONS..."
