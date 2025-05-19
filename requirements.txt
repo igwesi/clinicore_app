@@ -1,6 +1,6 @@
 asgiref
 beautifulsoup4
-Django==5.2.1
+Django
 django-bootstrap-v5
 django-environ
 django-ranged-response
