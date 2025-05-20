@@ -159,5 +159,4 @@
     paceOptions = {
         elements: true
     };
-
 })(jQuery);
