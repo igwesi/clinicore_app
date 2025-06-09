@@ -2,7 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title> Clinicore ~ {% block title %}{% endblock %}</title>
         {% include 'includes/head.html' %}
+        {% include 'includes/base/css.html' %}
+        {% block extra_css %}{% endblock %}
     </head>
 
     <body>

@@ -1,0 +1,22 @@
+{% extends "user/base.html" %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+
+{% block title %}Patient{% endblock %}
+
+{% block content %}
+<div class="row mb-5">
+    <h4> <span style="font-size:10px">- {{ request.path }}</span> </h4>
+    <div class="row">
+        <div class="col-10 col-md-12 p-4 mx-auto shadow">
+            <h4 class="my-5"> Update Patient Record </h4>
+            {% include 'components/form_templates.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

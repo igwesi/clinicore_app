@@ -1,0 +1,49 @@
+{% extends "registrations/base.html" %}
+{% load static %}
+
+{% load bootstrap5 %}
+{% bootstrap_messages %}
+
+{% block title %} - Create Account {% endblock %}
+
+{% block content %}
+<div class="row justify-content-center h-100 align-items-center">
+    <div class="col-xl-6">
+        <div class="">
+            <figure class="figure d-flex justify-content-center">
+                <img width="50%" src="{% static 'images/auth_2.png' %}" class="figure-img img-fluid rounded" alt="" />
+            </figure>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="authentication-content">
+            <div class="row no-gutters">
+                <div class="col-xl-12">
+                <div class="auth-form">
+                    <div class="brand-container">
+                        <img 
+                            src="{% static 'svg/logo.svg' %}" 
+                            srcset="{% static 'svg/logo.svg' %}"
+                            loading="lazy"
+                            alt="Clinicore Logo" class="img-fluid d-inline-block align-text-top">
+                        <h4 style="color:#1965b1;">Register</h4>
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-danger btn-block" style="background:#008eb0; border-color:#1965b1;">Create Account</button>
+                        </div>
+                        {% endbuttons %}
+                        
+                    </form>
+                    <div class="new-account mt-3">
+                        <p>Already have an account? <a class="text-danger" href="{% url 'login' %}">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

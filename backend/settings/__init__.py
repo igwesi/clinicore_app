@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     
     'core',
     'apps.accounts',
+    'apps.patients',
+    'apps.staff',
     'apps.clinic_app',
 ]
 

@@ -30,13 +30,13 @@
             crossorigin="anonymous"/>
         <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
         <style>
-            .authincation-content {
+            .authentication-content {
                 background: #fff;
                 box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
                 border-radius: 5px;
             }
             .auth-form {
-                padding: 50px 50px;
+                padding: 80px 100px;
             }
             .auth-form .btn {
                 height: 50px;
@@ -78,22 +78,40 @@
                     margin-top: -20px;
                 }
             }
+            .figure{
+                height:400px
+                overflow:hidden;
+                object-fit: contain;
+            }
+            img{
+                height: 100%;
+            }
+            label[for='id_captcha_1']{
+                padding: 10px 22px;
+                font-size: 1em;
+                color: #495057 !important;
+                opacity: 0.3;
+                font-weight: bold;
+                text-align: start;
+            }
+            #id_captcha_1{
+                color:red !important;
+            }
+            input#id_captcha_1{
+                display: inline-flex;
+                width: calc(100%/1.3);
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            .captcha{
+                width:20%;
+            }
         </style>
     </head>
     <body class="h-100">
-        <div class="authincation h-100">
-            <div class="container-fluid h-100">
-                <div class="row justify-content-center h-100 align-items-center">
-                    <div class="col-md-6">
-                        <div class="authincation-content">
-                            <div class="row no-gutters">
-                                <div class="col-xl-12">
-                                    {% block content %}{% endblock %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="authentication">
+            <div class="container-fluid">
+                {% block content %}{% endblock %}
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
