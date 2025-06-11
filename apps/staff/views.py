@@ -3,12 +3,12 @@ from django.views import View
 from apps.accounts.forms import LoginForm, RegisterForm
 
 
-class staffDashboard(View):
+class dashboardView(View):
     def get(self, request):
-        return render(request, 'core/staff/dashboard.html')
+        return render(request, 'user/staff/dashboard.html')
 
 
-class staffLogin(View):
+class loginView(View):
     def get(self, request):
         form = LoginForm()
         return render(request, 'registrations/login.html', {'form': form})

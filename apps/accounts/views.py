@@ -14,9 +14,19 @@ class dashboardView(View):
             return redirect('login')
         return request.user.is_authenticated
     
+    def patient(self, request):
+        return redirect('patient:dashboard')
+    
+    def staff(self, request):
+        return redirect('Staff:dashboard')
+    
     def get(self, request):
         patient_count = Patient.objects.all().count()
         self.user_authenticated(request)
+        if request.user.role == 'staff':
+            return self.staff(request)
+        elif request.user.role == 'patient':
+            return self.patient(request)
         return render(request, 'core/dashboard.html', {
             'patient_count': patient_count
         })

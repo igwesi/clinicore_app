@@ -53,4 +53,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Add any additional JavaScript here if needed
+    const HidePasswordBtn = document.querySelector('#hide_password');
+    const PasswordInput = document.querySelector('#id_password');
+
+    HidePasswordBtn.addEventListener('click', function() {
+        if (PasswordInput.type === 'password') {
+            PasswordInput.type = 'text';
+            HidePasswordBtn.textContent = 'Hide Password';
+        } else {
+            PasswordInput.type = 'password';
+            HidePasswordBtn.textContent = 'Show Password';
+        }
+    });
+</script>
+
 {% endblock %}
