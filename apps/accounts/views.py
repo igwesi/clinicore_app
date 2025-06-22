@@ -85,7 +85,7 @@ class registerView(View):
             
             # Check if the passwords match
             if password == confirm_password:
-                user = get_user_model().objects.create_user(email=email, password=password)
+                user = get_user_model().objects.create_user(email=email, password=password, role='patient')
                 login(request, user)
                 return redirect('dashboard')
             else:

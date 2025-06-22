@@ -7,12 +7,19 @@
 {% block title %} - Login {% endblock %}
 
 {% block content %}
+<style>
+    #id_captcha_1{
+        width: 100% !important;
+        display: flex;
+        position: relative;
+    }
+</style>
 <div class="row justify-content-center h-100 align-items-center">
-    <div class="col-md-6">
-        <div class="authentication-content">
+    <div class="col-12 col-md-6">
+        <div class="authentication-content p-0 p-md-3">
             <div class="row no-gutters">
-                <div class="col-xl-12">
-                    <div class="auth-form">
+                <div class="col-12 col-xl-12">
+                    <div class="auth-form p-4 p-md-5">
                         <div class="brand-container">
                             <img 
                                 src="{% static 'svg/logo.svg' %}" 
@@ -27,11 +34,13 @@
                             {% bootstrap_form form %}
                             
                             {% buttons %}
-                                <div class="">
-                                    <button type="submit" class="btn btn-danger btn-block" style="background:#008eb0; border-color:#1965b1;">Log in</button>
-                                </div>
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-md btn-danger btn-block" style="width:100%; background:#008eb0; border-color:#1965b1;">
+                                    Login
+                                </button>
+                            </div>
                             {% endbuttons %}
-                            <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                            <div class="d-block form-row d-md-flex justify-content-between mt-4 mb-2">
                                 <div class="form-group ml-4">
                                     <p>Don't have an account? <a class="text-danger" href="{% url 'register' %}">Register</a></p>
                                 </div>
@@ -45,6 +54,7 @@
             </div>
         </div>
     </div>
+
     <div class="col-xl-6">
         <div class="">
             <figure class="figure d-flex justify-content-center">
