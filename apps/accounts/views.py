@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import login_required
 from apps.clinic_app.models import Patient
 
 
+
+def authView(request):
+    return redirect('login')
+
 class dashboardView(View):
     def user_authenticated(self, request):
         if not request.user.is_authenticated:
@@ -15,7 +19,7 @@ class dashboardView(View):
         return request.user.is_authenticated
     
     def patient(self, request):
-        return redirect('patient:dashboard')
+        return redirect('Patient:dashboard')
     
     def staff(self, request):
         return redirect('Staff:dashboard')
@@ -38,34 +42,29 @@ class loginView(View):
     
     def post(self, request):
         form = LoginForm(request.POST)
+        
         if form.is_valid():
             human = True
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            remember_me = form.cleaned_data['remember_me']
             
             if get_user_model().objects.filter(email=email).exists():
-                # Check if the user is a human
                 user = authenticate(request, email=email, password=password)
                 if user is not None:
                     login(request, user)
-                    if remember_me:
-                        request.session.set_expiry(1209600)
-                    else:
-                        request.session.set_expiry(0)
                     return redirect('dashboard')
                 else:
                     # If the user is not authenticated, check if the username and password are correct
                     form.add_error(None, 'Invalid username or password')
-                    human = False
             else:
                 form.add_error(None, 'Account does not exist')
                 human = False
         else:
             form.add_error(None, 'Invalid form submission')
         return render(request, 'registrations/login.html', {'form': form})
-        
-    
+
+
+
 class registerView(View):
     def get(self, request):
         form = RegisterForm()
@@ -94,7 +93,6 @@ class registerView(View):
         else:
             form.add_error(None, 'Invalid form submission')
             return render(request, 'registrations/register.html', {'form': form})        
-    
 
 class logoutView(View):
     def get(self, request):

@@ -6,5 +6,5 @@ app_name = "Staff"
 
 urlpatterns = [
     path('', dashboardView.as_view(), name='dashboard'),
-    path('login/', loginView.as_view(), name='staff-login'),
+    path('search-patient', searchPatient, name='search-patient'),
 ]

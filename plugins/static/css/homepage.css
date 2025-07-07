@@ -1,5 +1,6 @@
 *{
-    --primary-green-color: #2ed604;
+    --primary-color: #936251;
+    --secondary-color: #D5DBD9;
 }
 
 body{
@@ -22,7 +23,7 @@ body{
     color: #ffffff;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-radius: 50% 50% 0px 50%;
-    background:rgb(46, 214, 4);
+    background: var(--primary-color);
     transition: all ease-in-out 0.3s;
     animation: aminateTextColor 2s infinite;
 }
@@ -30,7 +31,7 @@ body{
 .brand{
     font-size: 30px;
     letter-spacing: 2px;
-    background:#2ed604;
+    background:#D5DBD9;
     padding:5px 15px;
     border-radius: 1px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -141,13 +142,13 @@ body{
 
 @keyframes aminateTextColor{
     0%{
-        color: rgb(46, 214, 4);
+        color: var(--primary-color);
     }
     50%{
-        color: #ffffff;
+        color: var(--secondary-color);
     }
     100%{
-        color: rgb(46, 214, 4);
+        color: var(--primary-color);
     }
 }
 
