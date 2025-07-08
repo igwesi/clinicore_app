@@ -27,54 +27,54 @@ class Appointment(models.Model):
         
 
 
-class Drug(models.Model):
-    name                = models.CharField(max_length=100)
-    manufacturer        = models.CharField(max_length=100)
-    quantity            = models.IntegerField(default=0)
-    expiration_date     = models.DateField()
-    price               = models.DecimalField(max_digits=10, decimal_places=2)
-    last_updated        = models.DateField(auto_now_add=True)
+# class Drug(models.Model):
+#     name                = models.CharField(max_length=100)
+#     manufacturer        = models.CharField(max_length=100)
+#     quantity            = models.IntegerField(default=0)
+#     expiration_date     = models.DateField()
+#     price               = models.DecimalField(max_digits=10, decimal_places=2)
+#     last_updated        = models.DateField(auto_now_add=True)
 
-    def is_available(self):
-        return True if self.quantity > 0 else False
+#     def is_available(self):
+#         return True if self.quantity > 0 else False
 
-    class Meta:
-        verbose_name = 'Drug'
-        verbose_name_plural = 'Drug'
-        ordering = ['-id']
+#     class Meta:
+#         verbose_name = 'Drug'
+#         verbose_name_plural = 'Drug'
+#         ordering = ['-id']
 
 
-class Prescription(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    doctor  = models.ForeignKey(Staff, on_delete=models.CASCADE)
-    comment = models.TextField(blank=True)
-    date_prescribed = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, default='active')
+# class Prescription(models.Model):
+#     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+#     doctor  = models.ForeignKey(Staff, on_delete=models.CASCADE)
+#     comment = models.TextField(blank=True)
+#     date_prescribed = models.DateTimeField(auto_now_add=True)
+#     status = models.CharField(max_length=20, default='active')
     
-    class Meta:
-        verbose_name = 'Prescription'
-        verbose_name_plural = 'Prescription'
-        ordering = ['-id']
+#     class Meta:
+#         verbose_name = 'Prescription'
+#         verbose_name_plural = 'Prescription'
+#         ordering = ['-id']
 
-class PrescriptionItem(models.Model):
-    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
-    drug        = models.ForeignKey(Drug, on_delete=models.CASCADE)
-    dosage      = models.CharField(max_length=50, blank=True)
-    frequency   = models.CharField(max_length=50, blank=True)
-    duration    = models.CharField(max_length=50, blank=True)
+# class PrescriptionItem(models.Model):
+#     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+#     drug        = models.ForeignKey(Drug, on_delete=models.CASCADE)
+#     dosage      = models.CharField(max_length=50, blank=True)
+#     frequency   = models.CharField(max_length=50, blank=True)
+#     duration    = models.CharField(max_length=50, blank=True)
 
-    class Meta:
-        verbose_name = 'Prescription Item'
-        verbose_name_plural = 'Prescription Item'
-        ordering = ['-id']
+#     class Meta:
+#         verbose_name = 'Prescription Item'
+#         verbose_name_plural = 'Prescription Item'
+#         ordering = ['-id']
         
-class Dispensation(models.Model):
-    prescription    = models.ForeignKey(Prescription, on_delete=models.CASCADE)
-    pharmacist      = models.ForeignKey(Staff, on_delete=models.CASCADE)
-    date_dispensed  = models.DateTimeField(auto_now_add=True)
-    quantity        = models.IntegerField()
+# class Dispensation(models.Model):
+#     prescription    = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+#     pharmacist      = models.ForeignKey(Staff, on_delete=models.CASCADE)
+#     date_dispensed  = models.DateTimeField(auto_now_add=True)
+#     quantity        = models.IntegerField()
     
-    class Meta:
-        verbose_name = 'Dispensation'
-        verbose_name_plural = 'Dispensation'
-        ordering = ['id']
+#     class Meta:
+#         verbose_name = 'Dispensation'
+#         verbose_name_plural = 'Dispensation'
+#         ordering = ['id']

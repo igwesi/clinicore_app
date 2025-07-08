@@ -1,0 +1,44 @@
+{% extends "registrations/base.html" %}
+{% load static %}
+{% load bootstrap5 %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+{% block title %} - Login {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-2">
+        <div class="col-12 bg-light shadow p-4">
+            <div class="brand-container">
+                <img width="10%" src="{% static 'images/aui-logo.png' %}" alt="Augustine University Logo" class="img-fluid"/>
+                <h4 class="login-account-text">Choose Account Role</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gap-3">
+        <div class="col-12 col-md-4">
+            <form method="POST">{% csrf_token %}
+                <div class="mb-3">
+                    <label for="auth-role-field" class="form-label text-danger">Role</label>
+                    <select
+                        class="form-select form-select-lg"
+                        name="auth-role"
+                        id="auth-role">
+                        <option selected>Select one</option>
+                        <option value="staff">Staff</option>
+                        <option value="">Patient</option>
+                    </select>
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-danger">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

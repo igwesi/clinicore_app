@@ -13,13 +13,13 @@ from apps.accounts.forms import (
 from .forms import (
     PatientForm,
     EditPatientForm,
-    DrugForm,
+    # DrugForm,
 )
 
-from .models import (
-    Drug,
-    Appointment,
-)
+#from .models import (
+    #Drug,
+    # Appointment,
+#)
 
 class clinicView(LoginRequiredMixin, TemplateView):
     template_name = 'core/clinic.html'

@@ -1,12 +1,19 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
-from .forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from apps.clinic_app.models import Patient
+from .forms import (
+    LoginForm, 
+    RegisterForm, 
+    PatientForm, 
+    AdminForm
+)
 
+
+Account = get_user_model()
 
 
 def authView(request):
@@ -76,20 +83,20 @@ class registerView(View):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            confirm_password = form.cleaned_data['confirm_password']
+            # confirm_password = form.cleaned_data['confirm_password']
             
             if get_user_model().objects.filter(email=email).exists():
                 form.add_error(None, 'Account already exists')
                 return render(request, 'registrations/register.html', {'form': form})
             
             # Check if the passwords match
-            if password == confirm_password:
-                user = get_user_model().objects.create_user(email=email, password=password, role='patient')
-                login(request, user)
-                return redirect('dashboard')
-            else:
-                form.add_error(None, 'Passwords do not match')
-                return render(request, 'registrations/register.html', {'form': form})
+            # if password == confirm_password:
+            # else:
+                # form.add_error(None, 'Passwords do not match')
+                # return render(request, 'registrations/register.html', {'form': form})
+            user = get_user_model().objects.create_user(email=email, password=password, role='patient')
+            login(request, user)
+            return redirect('auth-role-selection')
         else:
             form.add_error(None, 'Invalid form submission')
             return render(request, 'registrations/register.html', {'form': form})        
@@ -98,3 +105,66 @@ class logoutView(View):
     def get(self, request):
         logout(request)
         return redirect("login")
+    
+    
+class AuthRoleSelection(View):
+
+    def get(self, request):
+        return render(request, 'registrations/role-selection.html')
+    
+    def post(self, request):
+        role = request.POST.get('auth-role')
+        account = Account.objects.get(email=request.user.email)
+        if role == 'patient' or role == 'staff':
+            account.role = role.lower()
+            account.save()
+            return redirect('auth-profile-setup')
+        messages.error(request, 'Invalid role selected')        
+        return redirect('auth-role-selection')
+    
+
+
+class AuthProfileSetup(View):
+    
+    def PatientProfile(self, request):
+        form = PatientForm()
+        if request.POST:
+            form = PatientForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('dashboard')
+            
+            messages.error(request, form.errors)
+        return render(request, 'registrations/auth-profile-setup.html', {'form': form})
+    
+    def AdminProfile(self, request):
+        form = AdminForm()
+        if request.POST:
+            form = AdminForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('dashboard')
+            messages.error(request, form.errors)
+        return render(request, 'registrations/auth-profile-setup.html', {'form': form})
+    
+    def get(self, request):
+        if request.user.role == 'patient':
+            return self.PatientProfile(request)
+        elif request.user.role == 'staff':
+            return self.AdminProfile(request)
+        
+        return redirect('auth-role-selection')
+    
+    def post(self, request):
+        if request.user.role == 'patient':
+            form = PatientForm(request.POST)
+        else: form = AdminForm(request.POST)
+
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            return redirect('dashboard')
+    
+        messages.error(request, form.errors)    
+        return redirect('dashboard')
