@@ -1,0 +1,93 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+<div class="main-panel">
+	<div class="content">
+		<div class="container-fluid">
+			<h4 class="page-title">Dashboard</h4>
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card card-stats card-danger">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="la la-newspaper-o"></i>
+									</div>
+								</div>
+								<div class="col-7 d-flex align-items-center">
+									<div class="numbers">
+										<p class="card-category">Appointments</p>
+										<h4 class="card-title">13</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header ">
+							<h4 class="card-title">Recent Activities</h4>
+						</div>
+						<div class="card-body">
+							<p>Recent activities will be displayed here.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						
+						<div class="card-header ">
+							<h4 class="card-title">Recent Appointments</h4>
+							<p class="card-category">Patient</p>
+						</div>
+						{% if all_patients %}
+						<div class="card-body">
+							<table class="table table-head-bg-success table-striped table-hover">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">First</th>
+										<th scope="col">Last</th>
+										<th scope="col">Handle</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for patient in all_patients %}
+									<tr>
+										<td>1</td>
+										<td>Emmanuel</td>
+										<td>Igwesi</td>
+										<td>@igwesi</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Chris</td>
+										<td>Thornton</td>
+										<td>@chris</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td colspan="2">Larry Johnson</td>
+										<td>@larry</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

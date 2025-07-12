@@ -84,17 +84,11 @@ class registerView(View):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            # confirm_password = form.cleaned_data['confirm_password']
             
             if get_user_model().objects.filter(email=email).exists():
                 form.add_error(None, 'Account already exists')
                 return render(request, 'registrations/register.html', {'form': form})
             
-            # Check if the passwords match
-            # if password == confirm_password:
-            # else:
-                # form.add_error(None, 'Passwords do not match')
-                # return render(request, 'registrations/register.html', {'form': form})
             user = get_user_model().objects.create_user(email=email, password=password, role='patient')
             login(request, user)
             return redirect('auth-role-selection')

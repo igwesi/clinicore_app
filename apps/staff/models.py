@@ -12,12 +12,12 @@ ROLE = (
 
 class Staff(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
-    firstName   = models.CharField(max_length=200)
-    lastName    = models.CharField(max_length=200)
-    role        = models.CharField(max_length=200, choices=ROLE, default='doctor')
-    contact     = models.CharField(max_length=20, unique=True, help_text='Phone number')
+    firstName   = models.CharField(max_length=200, blank=True, null=True)
+    lastName    = models.CharField(max_length=200, blank=True, null=True)
+    role        = models.CharField(max_length=200, blank=True, null=True, choices=ROLE, default='doctor')
+    contact     = models.CharField(max_length=20, help_text='Phone number', blank=True, null=True)
     account     = models.OneToOneField(
-        get_user_model(), on_delete=models.CASCADE, related_query_name='staff', related_name='staff')
+        get_user_model(), on_delete=models.CASCADE, blank=True, null=True, related_query_name='staff', related_name='staff')
     
     def __str__(self):
         return f"{self.firstName} {self.lastName}"
