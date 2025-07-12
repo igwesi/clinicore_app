@@ -10,16 +10,4 @@ DATABASES = {
     }
 }
 
-
-DATABASE = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',   
-        'HOST': env("DB_HOST"),
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PORT': env("DB_PORT"),
-        'PASSWORD': env("DB_PASSWORD"),
-    }
-}
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
