@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from apps.clinic_app.models import Patient
+from apps.clinic_app.models import Staff
 from .forms import (
     LoginForm, 
     RegisterForm, 
@@ -115,8 +116,14 @@ class AuthRoleSelection(View):
         role = request.POST.get('auth-role')
         account = Account.objects.get(email=request.user.email)
         
-        if role == 'patient' or role == 'staff':
+        if role == 'patient':
             account.role = role.lower()
+            Patient.objects.get_or_create(account=account)
+            account.save()
+        
+        if role == 'staff':
+            account.role = role.lower()
+            Staff.objects.get_or_create(account=account)
             account.save()
             return redirect('auth-profile-setup')
         
@@ -126,18 +133,14 @@ class AuthRoleSelection(View):
 
 
 class AuthProfileSetup(View):
-    
     def PatientProfile(self, request):
-        
         form = PatientForm()
         
         if request.POST:
             form = PatientForm(request.POST)
-            
             if form.is_valid():
                 form.save()
                 return redirect('dashboard')
-            
             messages.error(request, form.errors)
         return render(request, 'registrations/auth-profile-setup.html', {'form': form})
     
@@ -152,7 +155,6 @@ class AuthProfileSetup(View):
         return render(request, 'registrations/auth-profile-setup.html', {'form': form})
     
     def get(self, request):
-        
         if request.user.role == 'patient':
             return self.PatientProfile(request)
         elif request.user.role == 'staff':
