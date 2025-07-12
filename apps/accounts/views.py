@@ -9,7 +9,7 @@ from .forms import (
     LoginForm, 
     RegisterForm, 
     PatientForm, 
-    AdminForm
+    StaffForm
 )
 
 
@@ -108,17 +108,18 @@ class logoutView(View):
     
     
 class AuthRoleSelection(View):
-
     def get(self, request):
         return render(request, 'registrations/role-selection.html')
     
     def post(self, request):
         role = request.POST.get('auth-role')
         account = Account.objects.get(email=request.user.email)
+        
         if role == 'patient' or role == 'staff':
             account.role = role.lower()
             account.save()
             return redirect('auth-profile-setup')
+        
         messages.error(request, 'Invalid role selected')        
         return redirect('auth-role-selection')
     
@@ -127,9 +128,12 @@ class AuthRoleSelection(View):
 class AuthProfileSetup(View):
     
     def PatientProfile(self, request):
+        
         form = PatientForm()
+        
         if request.POST:
             form = PatientForm(request.POST)
+            
             if form.is_valid():
                 form.save()
                 return redirect('dashboard')
@@ -138,9 +142,9 @@ class AuthProfileSetup(View):
         return render(request, 'registrations/auth-profile-setup.html', {'form': form})
     
     def AdminProfile(self, request):
-        form = AdminForm()
+        form = StaffForm()
         if request.POST:
-            form = AdminForm(request.POST)
+            form = StaffForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect('dashboard')
@@ -148,23 +152,32 @@ class AuthProfileSetup(View):
         return render(request, 'registrations/auth-profile-setup.html', {'form': form})
     
     def get(self, request):
+        
         if request.user.role == 'patient':
             return self.PatientProfile(request)
         elif request.user.role == 'staff':
             return self.AdminProfile(request)
-        
         return redirect('auth-role-selection')
     
     def post(self, request):
+        
         if request.user.role == 'patient':
             form = PatientForm(request.POST)
-        else: form = AdminForm(request.POST)
+            
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.account = request.user
+                instance.save()
+                return redirect('dashboard')        
 
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            return redirect('dashboard')
-    
+        if request.user.role == 'staff':
+            form = StaffForm(request.POST)
+
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.account = request.user
+                instance.save()
+                return redirect('dashboard')
+
         messages.error(request, form.errors)    
         return redirect('dashboard')
