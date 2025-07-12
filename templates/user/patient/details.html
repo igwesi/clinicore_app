@@ -1,0 +1,58 @@
+{% extends 'user/base.html' %}
+
+
+{% block content %}
+<div class="main-panel">
+	<div class="content">
+		
+        <div class="container-fluid">
+			<h4 class="page-title">{{ patient.get_fullName }}</h4>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                {% if patient %}
+                <div class="col-12 col-md-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Personal Information</h5>
+                            <p class="card-text">Matric ID: {{ patient.userID }}</p>
+                            <p class="card-text">Date of Birth: {{ patient.dataOfBirth }}</p>
+                            <p class="card-text">Blood Type: {{ patient.bloodType }}</p>
+                            <hr class="hr"/>
+                            <h4 class="card-title">Contact Information</h4>
+                            <p class="card-text">Email: {{ patient.account.email }}</p>
+                            <hr class="hr"/>
+                            <h4 class="card-title">Medical Information</h4>
+                            <p class="card-text">Allergies: {{ patient.allergies }}</p>
+                            <p class="card-text">Date Joined: {{ patient.account.date_joined }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md">
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2">Health Records</h5>
+                                <a href="#" class="btn btn-primary">View Records</a>
+                                <a href="#" class="btn btn-danger">Create Record</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Actions</h5>
+                                <a href="{% url 'Patient:search_patient' %}" class="btn btn-primary">Search Patients</a>
+                                <a href="{% url 'Staff:dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>     
+        </div>     
+    </div>
+</div>
+{% endblock %}

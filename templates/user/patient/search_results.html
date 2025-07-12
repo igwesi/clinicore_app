@@ -1,0 +1,29 @@
+{% extends 'user/base.html' %}
+
+
+{% block content %}
+<div class="main-panel">
+	<div class="content">
+		
+        <div class="container-fluid">
+			<h4 class="page-title">Search Result(s)</h4>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                {% if patients %}
+                {% for patient in patients %}
+                <div class="col-md-4">
+                    <a href="{% url 'Patient:patient_detail' patient.pk %}" class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ patient.get_fullName }} - {{ patient.userID }}</h5>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %} 
+                {% endif %}
+            </div>     
+        </div>     
+    </div>
+</div>
+{% endblock %}

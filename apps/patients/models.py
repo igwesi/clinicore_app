@@ -21,7 +21,7 @@ class Patient(models.Model):
     lastName    = models.CharField(max_length=250, blank=False)
     dataOfBirth = models.DateField()
     bloodType   = models.CharField(max_length=5, choices=BLOOD_TYPE, default='O')
-    allergies   = models.TextField()
+    allergies   = models.TextField(blank=True, null=True, help_text='List of allergies')
     gender      = models.CharField(max_length=10, choices=GENDER, default='M')
     contact     = models.CharField(max_length=20, unique=True, help_text='Phone number')
     account     = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='patient', related_query_name='patient')
@@ -33,4 +33,4 @@ class Patient(models.Model):
         return str(self.firstName)
     
     def __str__(self):
-        return self.short_name
+        return self.get_fullName()

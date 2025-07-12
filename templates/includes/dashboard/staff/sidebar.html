@@ -1,0 +1,80 @@
+{% load static %}
+<div class="sidebar">
+    <div class="scrollbar-inner sidebar-wrapper">
+        <div class="user">
+            <div class="photo">
+                <img src="{% static 'theme/assets/img/profile.jpg' %}">
+            </div>
+            <div class="info">
+                <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                    <span>
+                        {{ request.user |truncatechars:10 }}
+
+                        {% if request.user.role == 'staff' %}
+                        <span class="user-level text-uppercase">Staff</span>
+                        {% else %}
+                        <span class="user-level text-uppercase">Patient</span>
+                        {% endif %}
+                        <span class="caret"></span>
+                    </span>
+                </a>
+                <div class="clearfix"></div>
+
+                <div class="collapse in" id="collapseExample" aria-expanded="true" style="">
+                    <ul class="nav">
+                        <li>
+                            <a href="#profile">
+                                <span class="link-collapse">My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#edit">
+                                <span class="link-collapse">Edit Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#settings">
+                                <span class="link-collapse">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li class="nav-item active">
+                <a href="{% url 'dashboard' %}">
+                    <i class="la la-dashboard"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="{% url 'Patient:all_patients' %}">
+                    <i class="la la-users"></i>
+                    <p>Patients</p>
+                    <span class="badge badge-count">+</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#appointments">
+                    <i class="la la-bell"></i>
+                    <p>Appointments</p>
+                    <span class="badge badge-danger">+</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#components">
+                    <i class="la la-table"></i>
+                    <p>Components</p>
+                </a>
+            </li>
+            <li class="nav-item update-pro">
+                <button  data-toggle="modal" data-target="#modalUpdate">
+                    <i class="la la-share-square"></i>
+                    <p>Logout</p>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+{% extends 'user/base.html' %}
+
+
+{% block content %}
+<div class="main-panel">
+	<div class="content">
+		
+        <div class="container-fluid">
+			<h4 class="page-title">All Patients</h4>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <h6 class="col-12">Total Patients: {{ patients|length }}</h6>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                {% if patients %}
+                <div class="card-body">
+                    <table class="table table-head-bg-success table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for patient in patients %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>
+                                    <a href="{% url 'Patient:patient_detail' patient.pk %}">
+                                        @{{ patient.userID }}
+                                    </a>
+                                </td>
+                                <td>Emmanuel</td>
+                                <td>Igwesi</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+            </div>     
+        </div>     
+    </div>
+</div>
+{% endblock %}
