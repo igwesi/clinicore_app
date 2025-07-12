@@ -18,5 +18,4 @@ DATABASES = {
         'PASSWORD': env("DB_PASSWORD"),
     }
 }
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
