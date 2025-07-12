@@ -6,6 +6,8 @@ from apps.accounts.forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from .models import Patient
+from apps.clinic_app.forms import AppointmentForm
+from apps.clinic_app.models import Appointment
 
 
 
@@ -42,3 +44,33 @@ class patientDetails(View):
             return render(request, 'user/patient/details.html', {'patient': patient})
         except Patient.DoesNotExist:
             return redirect('Staff:dashboard')
+        
+
+class BookAppointment(View):
+
+    def get(self, request):
+        user = request.user        
+        try:
+            if user.role == 'patient':
+                appointments = Appointment.objects.filter(patient__account=user)
+            else:
+                appointments = Appointment.objects.all(staff__account=user)
+            
+            form   = AppointmentForm()    
+            return render(request, 'user/book_appointment.html', {'form': form, 'appointments': appointments})
+    
+        except Appointment.DoesNotExist:
+            return redirect('Staff:dashboard')
+    
+    def post(self, request):
+        user = request.user
+        
+        form   = AppointmentForm(request.POST)
+        patient = Patient.objects.get(account=user)
+        
+        if form.is_valid():
+            appointment = form.save(commit=False)          
+            appointment.patient = patient
+            appointment.save()
+        
+        return render(request, 'user/book_appointment.html', {'form': form})

@@ -1,5 +1,6 @@
 from django import forms
 from apps.patients.models import Patient
+from .models import Appointment
 
 # from .models import (
     # Drug,
@@ -20,6 +21,12 @@ class EditPatientForm(forms.ModelForm):
         model = Patient
         fields = ["firstName", "lastName", "bloodType", "gender", "contact" , "allergies"]
         
+        
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ["doctor", "reason", "status", "comment", "datetime"]
+
 
 # class DrugForm(forms.ModelForm):
 #     name = forms.CharField(label='Name', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter Drug name'}))
