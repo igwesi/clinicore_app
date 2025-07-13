@@ -81,6 +81,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    {% if drugs %}
                     <div class="table-responsive">
                         <table class="table student-data-table m-t-20">
                             <thead>
@@ -93,40 +94,40 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% if drugs %}
-                                    {% for drug in drugs %}
-                                    <tr>
-                                        <td>
-                                            <label><input type="checkbox" value=""></label>
-                                            #{{ forloop.counter }}
-                                        </td>
-                                        <td>
-                                            {{ drug.name }}
-                                        </td>
-                                        <td>
-                                            {{ drug.quantity }}
-                                        </td>
-                                        <td>
-                                            {{ drug.is_available }}
-                                        </td>
-                                        <td>
-                                            <a href="{% url 'edit-drug' drug.pk %}" class="btn btn-sm btn-warning">
-                                                Edit
-                                            </a>
-                                            <a href="{% url 'delete-drug' drug.pk %}" class="btn btn-sm btn-danger">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                {% else %}
-                                <tr> 
-                                    <td>No Patient Record</td>
+                                {% for drug in drugs %}
+                                <tr>
+                                    <td>
+                                        <label><input type="checkbox" value=""></label>
+                                        #{{ forloop.counter }}
+                                    </td>
+                                    <td>
+                                        {{ drug.name }}
+                                    </td>
+                                    <td>
+                                        {{ drug.quantity }}
+                                    </td>
+                                    <td>
+                                        {{ drug.is_available }}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'edit-drug' drug.pk %}" class="btn btn-sm btn-warning">
+                                            Edit
+                                        </a>
+                                        <a href="{% url 'delete-drug' drug.pk %}" class="btn btn-sm btn-danger">
+                                            Delete
+                                        </a>
+                                    </td>
                                 </tr>
-                                {% endif %}
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
+                    {% else %}
+                    <div> 
+                        <td>No Patient Record</td>
+                    </div>
+                    {% endif %}
+
                 </div>
             </div>
         </div>

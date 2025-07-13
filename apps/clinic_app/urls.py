@@ -13,6 +13,7 @@ urlpatterns = [
     path('patients/', patientView.as_view(), name='patients'),
     path('patient/create/', createPatientView.as_view(), name='create-patient'),
     path('patient/<slug:slug>/edit/', createPatientView.as_view(), name='edit-patient'),
+    
     path('drug/list/', ListDrugView.as_view(), name="list-drugs"),
     path('drug/add/', createDrugView.as_view(), name="add-drug"),
     path('drug/<slug:slug>/edit/', createDrugView.as_view(), name="edit-drug"),

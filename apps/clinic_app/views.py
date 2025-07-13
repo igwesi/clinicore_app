@@ -13,13 +13,10 @@ from apps.accounts.forms import (
 from .forms import (
     PatientForm,
     EditPatientForm,
-    # DrugForm,
+    DrugInventoryForm
 )
 
-#from .models import (
-    #Drug,
-    # Appointment,
-#)
+from .models import DrugInventory, Appointment
 
 class clinicView(LoginRequiredMixin, TemplateView):
     template_name = 'core/clinic.html'
@@ -83,7 +80,7 @@ class ListDrugView(LoginRequiredMixin, View):
     template_name = 'core/drugs/view-drug.html'
 
     def get(self, request):
-        drugs = Drug.objects.all().order_by('id')
+        drugs = DrugInventory.objects.all()
         return render(request,
             self.template_name,
             {'drugs': drugs})
@@ -94,26 +91,26 @@ class createDrugView(LoginRequiredMixin, View):
 
     def get(self, request, slug=None):
         if slug != None:
-            drug = Drug.objects.get(pk=slug)
-            form = DrugForm(instance=drug)
+            drug = DrugInventory.objects.get(pk=slug)
+            form = DrugInventoryForm(instance=drug)
             return render(request,
                         self.edit_drug_template,
                         {'form':form})
-        form = DrugForm()
+        form = DrugInventoryForm()
         return render(request, 
             self.template_name,
             {'form': form})
     
     def post(self, request, slug=None):
         if slug != None:
-            drug = Drug.objects.get(pk=slug)
-            form = DrugForm(request.POST, instance=drug)
+            drug = DrugInventory.objects.get(pk=slug)
+            form = DrugInventoryForm(request.POST, instance=drug)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Drug Updated Successfully")
                 return redirect('list-drugs')
         else:
-            form = DrugForm(request.POST)
+            form = DrugInventoryForm(request.POST)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Drug Created Successfully")
@@ -124,6 +121,6 @@ class createDrugView(LoginRequiredMixin, View):
     
 class DeleteDrug(View):
     def get(self, request, slug):
-        Drug.objects.get(pk=slug).delete()
+        DrugInventory.objects.get(pk=slug).delete()
         messages.success(request, "Drug Deleted Successfully")
         return redirect('list-drugs')
