@@ -16,14 +16,14 @@ BLOOD_TYPE = (
 
 class Patient(models.Model):
     id          = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
-    userID      = models.CharField(max_length=250, unique=True, help_text="Matric Number of student")
-    firstName   = models.CharField(max_length=250, blank=False)
-    lastName    = models.CharField(max_length=250, blank=False)
+    userID      = models.CharField(max_length=250, unique=True, blank=True, null=True, help_text="Matric Number of student")
+    firstName   = models.CharField(max_length=250, blank=True, null=True)
+    lastName    = models.CharField(max_length=250, blank=True, null=True)
     dataOfBirth = models.DateField()
     bloodType   = models.CharField(max_length=5, choices=BLOOD_TYPE, default='O')
     allergies   = models.TextField(blank=True, null=True, help_text='List of allergies')
     gender      = models.CharField(max_length=10, choices=GENDER, default='M')
-    contact     = models.CharField(max_length=20, unique=True, help_text='Phone number')
+    contact     = models.CharField(max_length=20, blank=True, null=True, help_text='Phone number')
     account     = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='patient', related_query_name='patient')
     
     def get_fullName(self):
