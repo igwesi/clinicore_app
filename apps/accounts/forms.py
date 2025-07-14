@@ -35,7 +35,7 @@ class PatientForm(forms.ModelForm):
     firstName   = forms.CharField(max_length=250, required=False)
     lastName    = forms.CharField(max_length=250, required=False)
     userID      = forms.CharField(max_length=250, required=False)
-    dataOfBirth = forms.DateField(required=False)
+    dateOfBirth = forms.DateField(required=False)
     bloodType   = forms.ChoiceField(choices=[('A', 'A'), ('B', 'B'), ('AB', 'AB'), ('O', 'O')], required=False)
     allergies   = forms.CharField(max_length=250, required=False)
     gender      = forms.ChoiceField(choices=[('M', 'Male'), ('F', 'Female')], required=True)
@@ -43,5 +43,5 @@ class PatientForm(forms.ModelForm):
     
     class Meta:
         model = Patient
-        fields = ["firstName", "lastName", "userID", "dataOfBirth", "bloodType", "allergies", "gender", "contact"]
+        fields = ["firstName", "lastName", "userID", "dateOfBirth", "bloodType", "allergy", "gender", "contact"]
     

@@ -62,13 +62,13 @@ class ExpirationDateField(forms.DateField):
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ["firstName", "lastName", "bloodType", "gender", "contact" , "allergies"]
+        fields = ["firstName", "lastName", "bloodType", "gender", "contact" , "allergy"]
         
 
 class EditPatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ["firstName", "lastName", "bloodType", "gender", "contact" , "allergies"]
+        fields = ["firstName", "lastName", "bloodType", "gender", "contact" , "allergy"]
         
         
 class AppointmentForm(forms.ModelForm):

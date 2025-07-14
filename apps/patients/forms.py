@@ -10,10 +10,10 @@ class PatientForm(forms.ModelForm):
         fields = [
             'firstName',
             'lastName',
-            'dataOfBirth',
+            'dateOfBirth',
             'contact',
             'gender',
             'bloodType',
-            'allergies',
+            'allergy',
             'account',
         ]

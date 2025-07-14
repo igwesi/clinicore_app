@@ -19,9 +19,9 @@ class Patient(models.Model):
     userID      = models.CharField(max_length=250, unique=True, blank=True, verbose_name="Matric ID", null=True, help_text="Matric Number of student")
     firstName   = models.CharField(max_length=250, verbose_name="First Name", blank=True, null=True)
     lastName    = models.CharField(max_length=250, verbose_name="Last Name", blank=True, null=True)
-    dataOfBirth = models.DateField(verbose_name="Date of Birth")
+    dateOfBirth = models.DateField(verbose_name="Date of Birth", blank=True, null=True)
     bloodType   = models.CharField(max_length=5, verbose_name="Blood Type", choices=BLOOD_TYPE, default='O')
-    allergies   = models.TextField(blank=True, null=True, help_text='List of allergies')
+    allergy     = models.TextField(blank=True, null=True, help_text='List of allergies')
     gender      = models.CharField(max_length=10, choices=GENDER, default='M')
     contact     = models.CharField(max_length=20, verbose_name="Phone Number", blank=True, null=True, help_text='Phone number')
     account     = models.OneToOneField(

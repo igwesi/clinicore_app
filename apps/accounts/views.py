@@ -35,11 +35,13 @@ class dashboardView(View):
     def get(self, request):
         patient_count = Patient.objects.all().count()
         self.user_authenticated(request)
+
         if request.user.role == 'staff':
             return self.staff(request)
         elif request.user.role == 'patient':
             return self.patient(request)
-        return render(request, 'core/dashboard.html', {
+
+        return render(request, 'user/patient/dashboard.html', {
             'patient_count': patient_count
         })
 
@@ -104,9 +106,15 @@ class logoutView(View):
     
 class AuthRoleSelection(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        
         return render(request, 'registrations/role-selection.html')
-    
+
     def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        
         role = request.POST.get('auth-role')
         account = Account.objects.get(email=request.user.email)
         
@@ -114,6 +122,7 @@ class AuthRoleSelection(View):
             account.role = role.lower()
             Patient.objects.get_or_create(account=account)
             account.save()
+            return redirect("auth-profile-setup")
         
         if role == 'staff':
             account.role = role.lower()
@@ -136,6 +145,7 @@ class AuthProfileSetup(View):
                 form.save()
                 return redirect('dashboard')
             messages.error(request, form.errors)
+            
         return render(request, 'registrations/auth-profile-setup.html', {'form': form})
     
     def AdminProfile(self, request):
@@ -149,14 +159,21 @@ class AuthProfileSetup(View):
         return render(request, 'registrations/auth-profile-setup.html', {'form': form})
     
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         if request.user.role == 'patient':
             return self.PatientProfile(request)
+        
         elif request.user.role == 'staff':
             return self.AdminProfile(request)
+        
         return redirect('auth-role-selection')
     
     def post(self, request):
-        
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         if request.user.role == 'patient':
             form = PatientForm(request.POST)
             
