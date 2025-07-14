@@ -33,5 +33,789 @@ DRUGS = [
     "expiry_date": "2026-11-20",
     "purpose": "Depression and anxiety disorders",
     "usage": "Take once daily, morning or evening. May take 4-6 weeks for full effect."
+  },
+  {
+    "drug_name": "Ibuprofen",
+    "manufacturer": "Johnson & Johnson",
+    "expiry_date": "2026-09-30",
+    "purpose": "Pain relief and anti-inflammatory",
+    "usage": "Take 200-400mg every 4-6 hours with food. Do not exceed 3200mg daily."
+  },
+  {
+    "drug_name": "Omeprazole",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2027-02-28",
+    "purpose": "GERD and stomach ulcer treatment",
+    "usage": "Take 20mg once daily before breakfast for 14-28 days."
+  },
+  {
+    "drug_name": "Sertraline",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-11-20",
+    "purpose": "Depression and anxiety management",
+    "usage": "Take 50mg once daily. May require 4-6 weeks for full effect."
+  },
+  {
+    "drug_name": "Levothyroxine",
+    "manufacturer": "AbbVie",
+    "expiry_date": "2027-01-15",
+    "purpose": "Hypothyroidism treatment",
+    "usage": "Take on empty stomach 30-60 minutes before breakfast."
+  },
+  {
+    "drug_name": "Albuterol",
+    "manufacturer": "GlaxoSmithKline",
+    "expiry_date": "2026-03-31",
+    "purpose": "Asthma symptom relief",
+    "usage": "Inhale 1-2 puffs every 4-6 hours as needed for wheezing."
+  },
+  {
+    "drug_name": "Hydrochlorothiazide",
+    "manufacturer": "Merck & Co.",
+    "expiry_date": "2026-08-15",
+    "purpose": "Hypertension and edema management",
+    "usage": "Take 12.5-25mg once daily in the morning."
+  },
+  {
+    "drug_name": "Gabapentin",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2027-05-31",
+    "purpose": "Neuropathic pain and seizure control",
+    "usage": "Take 300mg three times daily. Do not stop abruptly."
+  },
+  {
+    "drug_name": "Losartan",
+    "manufacturer": "Merck & Co.",
+    "expiry_date": "2026-12-10",
+    "purpose": "Hypertension treatment",
+    "usage": "Take 50mg once daily, with or without food."
+  },
+  {
+    "drug_name": "Pantoprazole",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2027-04-22",
+    "purpose": "GERD and erosive esophagitis",
+    "usage": "Take 40mg once daily before a meal for 8 weeks."
+  },
+  {
+    "drug_name": "Tramadol",
+    "manufacturer": "Janssen",
+    "expiry_date": "2025-12-01",
+    "purpose": "Moderate to severe pain management",
+    "usage": "Take 50-100mg every 4-6 hours as needed. Maximum 400mg/day."
+  },
+  {
+    "drug_name": "Citalopram",
+    "manufacturer": "Lundbeck",
+    "expiry_date": "2026-10-15",
+    "purpose": "Depression treatment",
+    "usage": "Take 20mg once daily. Avoid alcohol during treatment."
+  },
+  {
+    "drug_name": "Diazepam",
+    "manufacturer": "Roche",
+    "expiry_date": "2026-07-30",
+    "purpose": "Anxiety, muscle spasms, and seizure control",
+    "usage": "Take 2-10mg 2-4 times daily as directed. Risk of dependence."
+  },
+  {
+    "drug_name": "Furosemide",
+    "manufacturer": "Sanofi",
+    "expiry_date": "2026-05-20",
+    "purpose": "Edema and hypertension treatment",
+    "usage": "Take 20-80mg daily. Monitor potassium levels."
+  },
+  {
+    "drug_name": "Warfarin",
+    "manufacturer": "Bristol Myers Squibb",
+    "expiry_date": "2026-11-05",
+    "purpose": "Anticoagulation therapy",
+    "usage": "Take once daily at same time. Regular INR monitoring required."
+  },
+  {
+    "drug_name": "Cetirizine",
+    "manufacturer": "Johnson & Johnson",
+    "expiry_date": "2027-03-15",
+    "purpose": "Allergy symptom relief",
+    "usage": "Take 10mg once daily. May cause drowsiness in some patients."
+  },
+  {
+    "drug_name": "Insulin Glargine",
+    "manufacturer": "Sanofi",
+    "expiry_date": "2026-09-10",
+    "purpose": "Type 1 and 2 diabetes management",
+    "usage": "Inject subcutaneously once daily at same time. Rotate injection sites."
+  },
+  {
+    "drug_name": "Duloxetine",
+    "manufacturer": "Eli Lilly",
+    "expiry_date": "2027-01-25",
+    "purpose": "Depression and neuropathic pain",
+    "usage": "Take 60mg once daily. Swallow whole, do not crush."
+  },
+  {
+    "drug_name": "Clopidogrel",
+    "manufacturer": "Sanofi",
+    "expiry_date": "2026-08-31",
+    "purpose": "Blood clot prevention",
+    "usage": "Take 75mg once daily with or without food."
+  },
+  {
+    "drug_name": "Escitalopram",
+    "manufacturer": "Lundbeck",
+    "expiry_date": "2027-02-14",
+    "purpose": "Depression and generalized anxiety",
+    "usage": "Take 10-20mg once daily. Full effects may take 4 weeks."
+  },
+  {
+    "drug_name": "Montelukast",
+    "manufacturer": "Merck & Co.",
+    "expiry_date": "2026-10-05",
+    "purpose": "Asthma and allergy prevention",
+    "usage": "Take 10mg once daily in the evening."
+  },
+  {
+    "drug_name": "Pregabalin",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2027-06-30",
+    "purpose": "Neuropathic pain and fibromyalgia",
+    "usage": "Take 75-150mg twice daily. May cause dizziness."
+  },
+  {
+    "drug_name": "Tamsulosin",
+    "manufacturer": "Astellas",
+    "expiry_date": "2026-12-25",
+    "purpose": "Benign prostatic hyperplasia treatment",
+    "usage": "Take 0.4mg once daily after same meal."
+  },
+  {
+    "drug_name": "Venlafaxine",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-11-15",
+    "purpose": "Depression and anxiety disorders",
+    "usage": "Take 75-150mg daily. Do not crush extended-release capsules."
+  },
+  {
+    "drug_name": "Carvedilol",
+    "manufacturer": "GlaxoSmithKline",
+    "expiry_date": "2027-03-10",
+    "purpose": "Hypertension and heart failure",
+    "usage": "Take 6.25-25mg twice daily with food."
+  },
+  {
+    "drug_name": "Fluoxetine",
+    "manufacturer": "Eli Lilly",
+    "expiry_date": "2026-09-05",
+    "purpose": "Depression and OCD treatment",
+    "usage": "Take 20mg once daily in the morning. May take 4 weeks for effect."
+  },
+  {
+    "drug_name": "Loratadine",
+    "manufacturer": "Bayer",
+    "expiry_date": "2027-04-18",
+    "purpose": "Seasonal allergy relief",
+    "usage": "Take 10mg once daily. Non-drowsy formula."
+  },
+  {
+    "drug_name": "Metoprolol",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2026-10-30",
+    "purpose": "Hypertension and angina",
+    "usage": "Take 25-100mg twice daily. Do not stop abruptly."
+  },
+  {
+    "drug_name": "Rivaroxaban",
+    "manufacturer": "Bayer",
+    "expiry_date": "2027-01-10",
+    "purpose": "Stroke and blood clot prevention",
+    "usage": "Take 20mg once daily with evening meal."
+  },
+  {
+    "drug_name": "Sildenafil",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-08-20",
+    "purpose": "Erectile dysfunction treatment",
+    "usage": "Take 50mg 1 hour before sexual activity. Maximum once daily."
+  },
+  {
+    "drug_name": "Trazodone",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-12-05",
+    "purpose": "Depression and insomnia",
+    "usage": "Take 50-100mg at bedtime. May cause drowsiness."
+  },
+  {
+    "drug_name": "Apixaban",
+    "manufacturer": "Bristol Myers Squibb",
+    "expiry_date": "2027-05-15",
+    "purpose": "Anticoagulation therapy",
+    "usage": "Take 5mg twice daily with or without food."
+  },
+  {
+    "drug_name": "Budesonide",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2026-11-30",
+    "purpose": "Asthma maintenance and Crohn's disease",
+    "usage": "Inhale twice daily or take orally as directed."
+  },
+  {
+    "drug_name": "Cephalexin",
+    "manufacturer": "Lupin",
+    "expiry_date": "2026-06-15",
+    "purpose": "Bacterial infections treatment",
+    "usage": "Take 250-500mg every 6 hours for 7-14 days."
+  },
+  {
+    "drug_name": "Doxycycline",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2027-02-28",
+    "purpose": "Antibiotic for various infections",
+    "usage": "Take 100mg twice daily with full glass of water. Avoid dairy."
+  },
+  {
+    "drug_name": "Esomeprazole",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2027-04-10",
+    "purpose": "GERD and acid reduction",
+    "usage": "Take 20-40mg once daily before meal."
+  },
+  {
+    "drug_name": "Finasteride",
+    "manufacturer": "Merck & Co.",
+    "expiry_date": "2026-12-20",
+    "purpose": "BPH and male pattern hair loss",
+    "usage": "Take 1mg (hair loss) or 5mg (BPH) once daily."
+  },
+  {
+    "drug_name": "Glipizide",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-10-10",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Take 5-10mg 30 minutes before breakfast."
+  },
+  {
+    "drug_name": "Hydroxyzine",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-07-25",
+    "purpose": "Anxiety and allergy relief",
+    "usage": "Take 25-100mg 3-4 times daily. Causes drowsiness."
+  },
+  {
+    "drug_name": "Ibandronate",
+    "manufacturer": "Roche",
+    "expiry_date": "2027-03-05",
+    "purpose": "Osteoporosis treatment",
+    "usage": "Take 150mg once monthly on empty stomach with full water."
+  },
+  {
+    "drug_name": "Januvia",
+    "manufacturer": "Merck & Co.",
+    "expiry_date": "2026-11-25",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Take 100mg once daily with or without food."
+  },
+  {
+    "drug_name": "Ketoconazole",
+    "manufacturer": "Janssen",
+    "expiry_date": "2026-05-10",
+    "purpose": "Fungal infections treatment",
+    "usage": "Apply topically twice daily or take orally as directed."
+  },
+  {
+    "drug_name": "Lansoprazole",
+    "manufacturer": "Takeda",
+    "expiry_date": "2027-01-05",
+    "purpose": "Gastric acid reduction",
+    "usage": "Take 15-30mg once daily before eating."
+  },
+  {
+    "drug_name": "Memantine",
+    "manufacturer": "Allergan",
+    "expiry_date": "2026-12-15",
+    "purpose": "Alzheimer's disease treatment",
+    "usage": "Take 5-20mg once daily. Dose titration required."
+  },
+  {
+    "drug_name": "Nifedipine",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-09-20",
+    "purpose": "Hypertension and angina",
+    "usage": "Take 30-60mg extended-release once daily."
+  },
+  {
+    "drug_name": "Olanzapine",
+    "manufacturer": "Eli Lilly",
+    "expiry_date": "2027-02-10",
+    "purpose": "Schizophrenia and bipolar disorder",
+    "usage": "Take 5-20mg once daily. Monitor weight and glucose."
+  },
+  {
+    "drug_name": "Potassium Chloride",
+    "manufacturer": "Bayer",
+    "expiry_date": "2026-08-10",
+    "purpose": "Potassium supplementation",
+    "usage": "Take 20mEq daily with food and full glass of water."
+  },
+  {
+    "drug_name": "Quetiapine",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2027-03-25",
+    "purpose": "Bipolar disorder and schizophrenia",
+    "usage": "Take 50-800mg daily. Dose varies by condition."
+  },
+  {
+    "drug_name": "Rosuvastatin",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2027-05-05",
+    "purpose": "Cholesterol reduction",
+    "usage": "Take 5-40mg once daily. Avoid grapefruit juice."
+  },
+  {
+    "drug_name": "Sulfamethoxazole/Trimethoprim",
+    "manufacturer": "Teva",
+    "expiry_date": "2026-06-30",
+    "purpose": "Bacterial infections treatment",
+    "usage": "Take 1-2 tablets twice daily for 10-14 days."
+  },
+  {
+    "drug_name": "Tiotropium",
+    "manufacturer": "Boehringer Ingelheim",
+    "expiry_date": "2026-11-10",
+    "purpose": "COPD maintenance",
+    "usage": "Inhale one capsule daily using HandiHaler device."
+  },
+  {
+    "drug_name": "Ursodiol",
+    "manufacturer": "Allergan",
+    "expiry_date": "2027-04-05",
+    "purpose": "Gallstone dissolution",
+    "usage": "Take 8-10mg/kg daily in divided doses with food."
+  },
+  {
+    "drug_name": "Valacyclovir",
+    "manufacturer": "GlaxoSmithKline",
+    "expiry_date": "2026-10-25",
+    "purpose": "Herpes treatment and suppression",
+    "usage": "Take 500mg-1g 1-3 times daily as prescribed."
+  },
+  {
+    "drug_name": "Wixela",
+    "manufacturer": "Mylan",
+    "expiry_date": "2026-12-31",
+    "purpose": "Asthma maintenance",
+    "usage": "Inhale one puff twice daily. Rinse mouth after use."
+  },
+  {
+    "drug_name": "Xarelto",
+    "manufacturer": "Bayer",
+    "expiry_date": "2027-06-15",
+    "purpose": "Anticoagulation therapy",
+    "usage": "Take 20mg once daily with evening meal."
+  },
+  {
+    "drug_name": "Yasmin",
+    "manufacturer": "Bayer",
+    "expiry_date": "2026-08-25",
+    "purpose": "Oral contraception",
+    "usage": "Take one tablet daily at same time for 21 days."
+  },
+  {
+    "drug_name": "Zolpidem",
+    "manufacturer": "Sanofi",
+    "expiry_date": "2026-07-15",
+    "purpose": "Insomnia treatment",
+    "usage": "Take 5-10mg immediately before bedtime. Short-term use only."
+  },
+  {
+    "drug_name": "Amlodipine",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2027-03-15",
+    "purpose": "Hypertension and angina",
+    "usage": "Take 5-10mg once daily. Swallow whole."
+  },
+  {
+    "drug_name": "Benzonatate",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-09-10",
+    "purpose": "Cough suppression",
+    "usage": "Swallow 100-200mg every 4-8 hours. Do not chew."
+  },
+  {
+    "drug_name": "Ciprofloxacin",
+    "manufacturer": "Bayer",
+    "expiry_date": "2026-05-31",
+    "purpose": "Bacterial infections treatment",
+    "usage": "Take 250-750mg twice daily. Avoid dairy and antacids."
+  },
+  {
+    "drug_name": "Dexamethasone",
+    "manufacturer": "Merck & Co.",
+    "expiry_date": "2027-01-20",
+    "purpose": "Anti-inflammatory and immunosuppressant",
+    "usage": "Dose varies by condition. Take with food."
+  },
+  {
+    "drug_name": "Empagliflozin",
+    "manufacturer": "Boehringer Ingelheim",
+    "expiry_date": "2027-04-30",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Take 10-25mg once daily in the morning."
+  },
+  {
+    "drug_name": "Fenofibrate",
+    "manufacturer": "AbbVie",
+    "expiry_date": "2026-11-05",
+    "purpose": "Triglyceride reduction",
+    "usage": "Take 145mg once daily with food."
+  },
+  {
+    "drug_name": "Guaifenesin",
+    "manufacturer": "Reckitt Benckiser",
+    "expiry_date": "2027-02-20",
+    "purpose": "Mucus clearance and cough relief",
+    "usage": "Take 200-400mg every 4 hours with full glass of water."
+  },
+  {
+    "drug_name": "Hydralazine",
+    "manufacturer": "Novartis",
+    "expiry_date": "2026-10-15",
+    "purpose": "Hypertension treatment",
+    "usage": "Take 10-50mg 4 times daily. Monitor for lupus-like symptoms."
+  },
+  {
+    "drug_name": "Isosorbide Mononitrate",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2027-03-01",
+    "purpose": "Angina prevention",
+    "usage": "Take 20mg twice daily with 7 hour interval."
+  },
+  {
+    "drug_name": "Jardiance",
+    "manufacturer": "Boehringer Ingelheim",
+    "expiry_date": "2027-05-20",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Take 10-25mg once daily in the morning."
+  },
+  {
+    "drug_name": "Ketorolac",
+    "manufacturer": "Roche",
+    "expiry_date": "2026-06-20",
+    "purpose": "Short-term pain management",
+    "usage": "Take 10mg every 4-6 hours. Maximum 5 days use."
+  },
+  {
+    "drug_name": "Levetiracetam",
+    "manufacturer": "UCB",
+    "expiry_date": "2027-01-10",
+    "purpose": "Seizure control",
+    "usage": "Take 500-1500mg twice daily. Do not stop abruptly."
+  },
+  {
+    "drug_name": "Methotrexate",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-12-10",
+    "purpose": "Rheumatoid arthritis and cancer",
+    "usage": "Take 7.5-20mg once weekly. Strict dosing schedule required."
+  },
+  {
+    "drug_name": "Naloxone",
+    "manufacturer": "Emergent BioSolutions",
+    "expiry_date": "2026-09-05",
+    "purpose": "Opioid overdose reversal",
+    "usage": "Administer 0.4-2mg intramuscularly or intranasally as needed."
+  },
+  {
+    "drug_name": "Oxybutynin",
+    "manufacturer": "Janssen",
+    "expiry_date": "2027-04-15",
+    "purpose": "Overactive bladder treatment",
+    "usage": "Take 5mg twice daily. Extended-release available."
+  },
+  {
+    "drug_name": "Phentermine",
+    "manufacturer": "Teva",
+    "expiry_date": "2026-07-20",
+    "purpose": "Short-term weight loss aid",
+    "usage": "Take 15-37.5mg once daily before breakfast. Short-term use only."
+  },
+  {
+    "drug_name": "Quinapril",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-11-30",
+    "purpose": "Hypertension treatment",
+    "usage": "Take 10-80mg once daily. Monitor potassium levels."
+  },
+  {
+    "drug_name": "Risedronate",
+    "manufacturer": "Allergan",
+    "expiry_date": "2027-02-05",
+    "purpose": "Osteoporosis treatment",
+    "usage": "Take 35mg once weekly on empty stomach with full water."
+  },
+  {
+    "drug_name": "Spironolactone",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-10-05",
+    "purpose": "Diuretic and hormone regulation",
+    "usage": "Take 25-100mg daily. Monitor potassium levels."
+  },
+  {
+    "drug_name": "Temazepam",
+    "manufacturer": "Mallinckrodt",
+    "expiry_date": "2026-08-15",
+    "purpose": "Insomnia treatment",
+    "usage": "Take 7.5-30mg at bedtime. Short-term use only."
+  },
+  {
+    "drug_name": "Ulipristal",
+    "manufacturer": "Watson",
+    "expiry_date": "2026-12-20",
+    "purpose": "Emergency contraception",
+    "usage": "Take single 30mg dose within 120 hours of unprotected intercourse."
+  },
+  {
+    "drug_name": "Valsartan",
+    "manufacturer": "Novartis",
+    "expiry_date": "2027-05-10",
+    "purpose": "Hypertension and heart failure",
+    "usage": "Take 80-320mg once daily."
+  },
+  {
+    "drug_name": "Warfarin",
+    "manufacturer": "Bristol Myers Squibb",
+    "expiry_date": "2026-11-15",
+    "purpose": "Anticoagulation therapy",
+    "usage": "Dose varies. Take at same time daily. Regular INR checks required."
+  },
+  {
+    "drug_name": "Xanax",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-07-25",
+    "purpose": "Anxiety and panic disorders",
+    "usage": "Take 0.25-0.5mg 3 times daily. Risk of dependence."
+  },
+  {
+    "drug_name": "Yaz",
+    "manufacturer": "Bayer",
+    "expiry_date": "2026-09-20",
+    "purpose": "Oral contraception",
+    "usage": "Take one tablet daily at same time for 28 days."
+  },
+  {
+    "drug_name": "Zyrtec",
+    "manufacturer": "Johnson & Johnson",
+    "expiry_date": "2027-03-30",
+    "purpose": "Allergy symptom relief",
+    "usage": "Take 10mg once daily. May cause drowsiness."
+  },
+  {
+    "drug_name": "Acetaminophen",
+    "manufacturer": "McNeil",
+    "expiry_date": "2027-01-15",
+    "purpose": "Pain and fever reduction",
+    "usage": "Take 500-1000mg every 4-6 hours. Maximum 4000mg daily."
+  },
+  {
+    "drug_name": "Bupropion",
+    "manufacturer": "GlaxoSmithKline",
+    "expiry_date": "2026-12-05",
+    "purpose": "Depression and smoking cessation",
+    "usage": "Take 150-300mg daily. Do not crush extended-release tablets."
+  },
+  {
+    "drug_name": "Cymbalta",
+    "manufacturer": "Eli Lilly",
+    "expiry_date": "2027-04-25",
+    "purpose": "Depression and chronic pain",
+    "usage": "Take 30-60mg once daily. Swallow whole."
+  },
+  {
+    "drug_name": "Diclofenac",
+    "manufacturer": "Novartis",
+    "expiry_date": "2026-10-31",
+    "purpose": "Pain and inflammation relief",
+    "usage": "Take 50mg 2-3 times daily with food."
+  },
+  {
+    "drug_name": "Eliquis",
+    "manufacturer": "Bristol Myers Squibb",
+    "expiry_date": "2027-06-10",
+    "purpose": "Blood clot prevention",
+    "usage": "Take 5mg twice daily with or without food."
+  },
+  {
+    "drug_name": "Fluconazole",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-08-05",
+    "purpose": "Fungal infections treatment",
+    "usage": "Take 150mg single dose or as directed for specific infection."
+  },
+  {
+    "drug_name": "Glimepiride",
+    "manufacturer": "Sanofi",
+    "expiry_date": "2026-11-20",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Take 1-4mg once daily with first meal."
+  },
+  {
+    "drug_name": "Humira",
+    "manufacturer": "AbbVie",
+    "expiry_date": "2026-12-15",
+    "purpose": "Autoimmune disorders treatment",
+    "usage": "Inject subcutaneously every 2 weeks. Rotate injection sites."
+  },
+  {
+    "drug_name": "Invokana",
+    "manufacturer": "Janssen",
+    "expiry_date": "2027-05-25",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Take 100-300mg once daily before first meal."
+  },
+  {
+    "drug_name": "Janumet",
+    "manufacturer": "Merck & Co.",
+    "expiry_date": "2026-10-20",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Take one tablet twice daily with meals."
+  },
+  {
+    "drug_name": "Keflex",
+    "manufacturer": "Lupin",
+    "expiry_date": "2026-06-10",
+    "purpose": "Bacterial infections treatment",
+    "usage": "Take 250-500mg every 6 hours for 7-14 days."
+  },
+  {
+    "drug_name": "Lyrica",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2027-03-20",
+    "purpose": "Neuropathic pain and fibromyalgia",
+    "usage": "Take 75-150mg twice daily. May cause dizziness."
+  },
+  {
+    "drug_name": "Meloxicam",
+    "manufacturer": "Boehringer Ingelheim",
+    "expiry_date": "2026-09-15",
+    "purpose": "Osteoarthritis and rheumatoid arthritis",
+    "usage": "Take 7.5-15mg once daily with food."
+  },
+  {
+    "drug_name": "Nexium",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2027-01-30",
+    "purpose": "GERD treatment",
+    "usage": "Take 20-40mg once daily before meal."
+  },
+  {
+    "drug_name": "Ozempic",
+    "manufacturer": "Novo Nordisk",
+    "expiry_date": "2026-11-25",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Inject subcutaneously once weekly. Rotate injection sites."
+  },
+  {
+    "drug_name": "Propranolol",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2027-04-10",
+    "purpose": "Hypertension and migraine prevention",
+    "usage": "Take 20-80mg 2-4 times daily. Do not stop abruptly."
+  },
+  {
+    "drug_name": "Qvar",
+    "manufacturer": "Teva",
+    "expiry_date": "2026-12-28",
+    "purpose": "Asthma maintenance",
+    "usage": "Inhale 1-2 puffs twice daily. Rinse mouth after use."
+  },
+  {
+    "drug_name": "Rybelsus",
+    "manufacturer": "Novo Nordisk",
+    "expiry_date": "2027-02-15",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Take 3-14mg once daily on empty stomach with water."
+  },
+  {
+    "drug_name": "Symbicort",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2026-10-10",
+    "purpose": "Asthma and COPD maintenance",
+    "usage": "Inhale 2 puffs twice daily. Rinse mouth after use."
+  },
+  {
+    "drug_name": "Toprol XL",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2027-05-01",
+    "purpose": "Hypertension and angina",
+    "usage": "Take 25-200mg once daily. Swallow whole."
+  },
+  {
+    "drug_name": "Ultram",
+    "manufacturer": "Janssen",
+    "expiry_date": "2026-08-30",
+    "purpose": "Moderate to moderately severe pain",
+    "usage": "Take 50-100mg every 4-6 hours. Maximum 400mg daily."
+  },
+  {
+    "drug_name": "Viagra",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-12-01",
+    "purpose": "Erectile dysfunction treatment",
+    "usage": "Take 50mg 1 hour before sexual activity. Maximum once daily."
+  },
+  {
+    "drug_name": "Wellbutrin",
+    "manufacturer": "GlaxoSmithKline",
+    "expiry_date": "2027-03-10",
+    "purpose": "Depression and smoking cessation",
+    "usage": "Take 150-300mg daily. Do not crush extended-release tablets."
+  },
+  {
+    "drug_name": "Xeljanz",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2027-01-05",
+    "purpose": "Rheumatoid arthritis treatment",
+    "usage": "Take 5mg twice daily. Monitor for infections."
+  },
+  {
+    "drug_name": "Yervoy",
+    "manufacturer": "Bristol Myers Squibb",
+    "expiry_date": "2026-11-30",
+    "purpose": "Melanoma treatment",
+    "usage": "Administer intravenously every 3 weeks for 4 doses."
+  },
+  {
+    "drug_name": "Zestril",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2027-04-20",
+    "purpose": "Hypertension and heart failure",
+    "usage": "Take 5-40mg once daily. May cause cough."
+  },
+  {
+    "drug_name": "Zofran",
+    "manufacturer": "GlaxoSmithKline",
+    "expiry_date": "2026-09-25",
+    "purpose": "Nausea and vomiting prevention",
+    "usage": "Take 4-8mg every 8 hours as needed."
+  },
+  {
+    "drug_name": "Zoloft",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2027-02-25",
+    "purpose": "Depression and anxiety disorders",
+    "usage": "Take 50-200mg once daily. May take 4-6 weeks for full effect."
+  },
+  {
+    "drug_name": "Zyprexa",
+    "manufacturer": "Eli Lilly",
+    "expiry_date": "2026-12-10",
+    "purpose": "Schizophrenia and bipolar disorder",
+    "usage": "Take 5-20mg once daily. Monitor weight and glucose."
+  },
+  {
+    "drug_name": "Zyrtec-D",
+    "manufacturer": "Johnson & Johnson",
+    "expiry_date": "2027-03-05",
+    "purpose": "Allergy and congestion relief",
+    "usage": "Take one tablet twice daily. May cause drowsiness."
   }
 ]

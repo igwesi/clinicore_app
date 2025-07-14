@@ -2,12 +2,15 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 from apps.accounts.forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
-from .models import Patient
+from .forms import Patient, PatientForm
 from apps.clinic_app.forms import AppointmentForm
 from apps.clinic_app.models import Appointment
+
 
 
 
@@ -44,7 +47,24 @@ class patientDetails(View):
             return render(request, 'user/patient/details.html', {'patient': patient})
         except Patient.DoesNotExist:
             return redirect('Staff:dashboard')
-        
+
+
+class AddPatientView(View):
+    template_name = 'core/patients/create-patient.html'
+    
+    def get(self, request):
+        form = PatientForm()
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, "Patient added successfully")
+            return redirect('dashboard')
+        messages.error(request, form.errors)
+        return render(request, self.template_name, {'form': form})
+
 
 class BookAppointment(View):
 

@@ -43,7 +43,7 @@
         </div>
 
         <ul class="nav">
-            <li class="nav-item active">
+            <li class="nav-item {% if 'Patient' in request.path %}active{% endif %}">
                 <a href="{% url 'dashboard' %}">
                     <i class="la la-dashboard"></i>
                     <p>Dashboard</p>
@@ -51,8 +51,8 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="#appointments">
+            <li class="nav-item {% if 'appointment' in request.path %}active{% endif %}">
+                <a href="{% url 'appointments' %}">
                     <i class="la la la-users"></i>
                     <p>Appointments</p>
                     <span class="badge badge-danger">25</span>
@@ -66,6 +66,7 @@
                     <span class="badge badge-count">14</span>
                 </a>
             </li>
+            
             <li class="nav-item update-pro">
                 <button  data-toggle="modal" data-target="#modalUpdate">
                     <i class="la la-share-square"></i>

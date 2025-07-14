@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block core %}
+<div class="container-fluid">
+    <div class="row w-100">
+        <div class="col-10 col-md-12 p-4 mx-auto">
+            <h4 class="my-5"> Appointments </h4>
+            <h4> <span style="font-size:10px">- {{ request.path }}</span> </h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Patient</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.patient.get_fullName }}</td>
+                        <td>{{ appointment.datetime }}</td>
+                        <td>{{ appointment.status }}</td>
+                        <td>
+                            <a href="{% url 'view-appointment' appointment.slug %}" class="btn btn-info">View</a>
+                            <a href="{% url 'edit-appointment' appointment.slug %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'delete-appointment' appointment.slug %}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if not appointments %}
+            <p class="text-muted">No appointments available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

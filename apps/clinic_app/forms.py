@@ -57,6 +57,8 @@ class ExpirationDateField(forms.DateField):
         if isinstance(value, datetime.date):
             return value.strftime('%Y-%m-%d')
         return value
+    
+
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
@@ -84,3 +86,14 @@ class DrugInventoryForm(forms.ModelForm):
         model = DrugInventory
         fields = ["name", "purpose", "usage", "manufacturer", "quantity", "expiration_date"]
 
+
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ["doctor", "reason", "status", "comment", "datetime"]
+    
+    def clean_datetime(self):
+        datetime = self.cleaned_data.get('datetime')
+        if datetime < datetime.now():
+            raise forms.ValidationError("Appointment date and time cannot be in the past.")
+        return datetime

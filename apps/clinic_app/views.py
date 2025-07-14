@@ -6,12 +6,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from apps.patients.models import Patient
 
+
 from apps.accounts.forms import (
     RegisterForm,
 )
 
 from .forms import (
     PatientForm,
+    AppointmentForm,
     EditPatientForm,
     DrugInventoryForm
 )
@@ -124,3 +126,55 @@ class DeleteDrug(View):
         DrugInventory.objects.get(pk=slug).delete()
         messages.success(request, "Drug Deleted Successfully")
         return redirect('list-drugs')
+    
+    
+
+class AppointmentView(LoginRequiredMixin, View):
+    template_name = 'core/appointments/list-appointments.html'
+
+    def get(self, request):
+        appointments = Appointment.objects.all()
+        return render(request,
+            self.template_name,
+            {'appointments': appointments})
+
+class createAppointmentView(LoginRequiredMixin, View):
+    template_name = 'core/appointments/create-appointment.html'
+    edit_template = 'core/appointments/edit-appointment.html'
+
+    def get(self, request, slug=None):
+        if slug != None:
+            appointment = Appointment.objects.get(pk=slug)
+            form = AppointmentForm(instance=appointment)
+            return render(request,
+                        self.edit_template,
+                        {'form':form, 'appointment':appointment})
+        form = AppointmentForm()
+        return render(request, 
+            self.template_name,
+            {'form': form})
+    
+    def post(self, request, slug=None):
+        if slug != None:
+            appointment = Appointment.objects.get(pk=slug)
+            form = AppointmentForm(request.POST, instance=appointment)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Appointment Updated Successfully")
+                return redirect('list-appointments')
+        else:
+            form = AppointmentForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Appointment Created Successfully")
+                return redirect('list-appointments')
+
+        messages.error(request, form.errors)
+        return redirect('create-appointment')
+    
+
+class DeleteAppointment(View):
+    def get(self, request, slug):
+        Appointment.objects.get(pk=slug).delete()
+        messages.success(request, "Appointment Deleted Successfully")
+        return redirect('list-appointments')

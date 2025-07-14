@@ -16,15 +16,21 @@ BLOOD_TYPE = (
 
 class Patient(models.Model):
     id          = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
-    userID      = models.CharField(max_length=250, unique=True, blank=True, null=True, help_text="Matric Number of student")
-    firstName   = models.CharField(max_length=250, blank=True, null=True)
-    lastName    = models.CharField(max_length=250, blank=True, null=True)
-    dataOfBirth = models.DateField()
-    bloodType   = models.CharField(max_length=5, choices=BLOOD_TYPE, default='O')
+    userID      = models.CharField(max_length=250, unique=True, blank=True, verbose_name="Matric ID", null=True, help_text="Matric Number of student")
+    firstName   = models.CharField(max_length=250, verbose_name="First Name", blank=True, null=True)
+    lastName    = models.CharField(max_length=250, verbose_name="Last Name", blank=True, null=True)
+    dataOfBirth = models.DateField(verbose_name="Date of Birth")
+    bloodType   = models.CharField(max_length=5, verbose_name="Blood Type", choices=BLOOD_TYPE, default='O')
     allergies   = models.TextField(blank=True, null=True, help_text='List of allergies')
     gender      = models.CharField(max_length=10, choices=GENDER, default='M')
-    contact     = models.CharField(max_length=20, blank=True, null=True, help_text='Phone number')
-    account     = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='patient', related_query_name='patient')
+    contact     = models.CharField(max_length=20, verbose_name="Phone Number", blank=True, null=True, help_text='Phone number')
+    account     = models.OneToOneField(
+        get_user_model(), 
+        verbose_name="Patient Account",
+        help_text="Patient Account",
+        on_delete=models.CASCADE, 
+        related_name='patient', 
+        related_query_name='patient')
     
     def get_fullName(self):
         return f" {self.firstName}  {self.lastName} "
@@ -34,3 +40,22 @@ class Patient(models.Model):
     
     def __str__(self):
         return self.get_fullName()
+    
+    
+
+class MedicalRecord(models.Model):
+    patient = models.ForeignKey(
+        Patient, on_delete=models.CASCADE
+    )
+    
+    staff = models.ForeignKey(
+        'staff.Staff', on_delete=models.CASCADE
+    )
+    
+    comment = models.TextField(blank=True, null=True)
+    
+    date_created = models.DateField(auto_now_add=True)
+    
+    
+    def __str__(self):
+        return str(self.pk)
