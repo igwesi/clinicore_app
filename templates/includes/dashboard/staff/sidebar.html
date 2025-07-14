@@ -43,27 +43,27 @@
         </div>
 
         <ul class="nav">
-            <li class="nav-item active">
+            <li class="nav-item {% if 'staff' in request.path %}active{% endif %}">
                 <a href="{% url 'dashboard' %}">
                     <i class="la la-dashboard"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item {% if 'patient' in request.path %}active{% endif %}">
                 <a href="{% url 'Patient:all_patients' %}">
                     <i class="la la-users"></i>
                     <p>Patients</p>
                     <span class="badge badge-count">+</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {% if 'appointment' in request.path %}active{% endif %}">
                 <a href="#appointments">
                     <i class="la la-bell"></i>
                     <p>Appointments</p>
                     <span class="badge badge-danger">+</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {% if 'drug' in request.path %}active{% endif %}">
                 <a href="{% url 'list-drugs' %}">
                     <i class="la la-table"></i>
                     <p>Drug Inventory</p>

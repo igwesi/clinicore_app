@@ -30,13 +30,15 @@ class Appointment(models.Model):
 class DrugInventory(models.Model):
     name                = models.CharField(max_length=100)
     manufacturer        = models.CharField(max_length=100)
+    purpose             = models.CharField(max_length=200, blank=True, null=True)
+    usage               = models.CharField(max_length=200, blank=True, null=True)
     quantity            = models.IntegerField(default=0)
     expiration_date     = models.DateField()
     last_updated        = models.DateField(auto_now_add=True)
 
     def is_available(self):
         return True if self.quantity > 0 else False
-
+    def __str__(self):return str(self.name)
     class Meta:
         verbose_name = 'Drug'
         verbose_name_plural = 'Drug'

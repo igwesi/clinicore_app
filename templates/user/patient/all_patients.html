@@ -1,52 +1,77 @@
-{% extends 'user/base.html' %}
+{% extends 'core/base.html' %}
 
 
-{% block content %}
-<div class="main-panel">
-	<div class="content">
-		
-        <div class="container-fluid">
-			<h4 class="page-title">All Patients</h4>
-        </div>
+{% block core %}
+<div class="container-fluid">
+    <h4 class="page-title">Patients</h4>
+    <h6>Total Patients: {{ patients|length }}</h6>
+    <h4> <span style="font-size:10px">- {{ request.path }}</span> </h4>
 
-        <div class="container-fluid">
-            <div class="row">
-                <h6 class="col-12">Total Patients: {{ patients|length }}</h6>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card p-4">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-10">
+                        <form class="form-inline w-100" method="GET" action="{% url 'Patient:search_patient' %}">
+                            <div class="w-100">
+                                <input type="text" name="patient" class="form-control w-100" placeholder="Search for patient...">
+                                <button type="submit" class="btn btn-primary mt-2">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'add-drug' %}" class="btn btn-outline-danger"> Add Patient</a>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    {% if patients %}
+                    <div class="table-responsive">
+                        <table class="table student-data-table m-t-20">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Other Links</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for patient in patients %}
+                                <tr>
+                                    <td>
+                                        <label><input type="checkbox" value=""></label>
+                                        #{{ forloop.counter }}
+                                    </td>
+                                    <td>
+                                        {{ patient.userID }}
+                                    </td>
+                                    <td>
+                                        {{ patient.get_fullName }}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'Patient:patient_detail' patient.pk %}" class="btn btn-sm btn-danger">
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div> 
+                        <td>No Patient Record</td>
+                    </div>
+                    {% endif %}
+
+                </div>
             </div>
         </div>
-
-        <div class="container-fluid">
-            <div class="row">
-                {% if patients %}
-                <div class="card-body">
-                    <table class="table table-head-bg-success table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for patient in patients %}
-                            <tr>
-                                <td>{{ forloop.counter }}</td>
-                                <td>
-                                    <a href="{% url 'Patient:patient_detail' patient.pk %}">
-                                        @{{ patient.userID }}
-                                    </a>
-                                </td>
-                                <td>{{patient.firstName}}</td>
-                                <td>{{patient.lastName}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                {% endif %}
-            </div>     
-        </div>     
+        <!-- /# column -->
     </div>
 </div>
+
 {% endblock %}
+
+

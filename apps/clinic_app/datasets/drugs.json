@@ -1,0 +1,37 @@
+DRUGS = [
+  {
+    "drug_name": "Lisinopril",
+    "manufacturer": "AstraZeneca",
+    "expiry_date": "2026-08-15",
+    "purpose": "Hypertension treatment and heart failure management",
+    "usage": "Take once daily, with or without food. Do not exceed prescribed dosage."
+  },
+  {
+    "drug_name": "Atorvastatin",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2025-12-01",
+    "purpose": "Cholesterol reduction and cardiovascular risk prevention",
+    "usage": "Take one tablet daily at bedtime. Avoid grapefruit products."
+  },
+  {
+    "drug_name": "Metformin HCl",
+    "manufacturer": "Bristol Myers Squibb",
+    "expiry_date": "2027-03-30",
+    "purpose": "Type 2 diabetes management",
+    "usage": "Take twice daily with meals. Start with low dose to minimize GI side effects."
+  },
+  {
+    "drug_name": "Amoxicillin",
+    "manufacturer": "GlaxoSmithKline",
+    "expiry_date": "2026-01-15",
+    "purpose": "Bacterial infections treatment",
+    "usage": "Take every 8 hours for prescribed duration. Complete full course even if symptoms improve."
+  },
+  {
+    "drug_name": "Sertraline HCl",
+    "manufacturer": "Pfizer",
+    "expiry_date": "2026-11-20",
+    "purpose": "Depression and anxiety disorders",
+    "usage": "Take once daily, morning or evening. May take 4-6 weeks for full effect."
+  }
+]

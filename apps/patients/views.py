@@ -29,7 +29,7 @@ class searchPatient(View):
             print(patients) 
             return render(request, 'user/patient/search_results.html', {'patients': patients, 'query_text': query_text})
         
-        return redirect('Staff:dashboard')
+        return redirect('Patient:all_patients')
 
 class allPatients(View):
     def get(self, request):

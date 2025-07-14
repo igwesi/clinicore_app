@@ -95,7 +95,7 @@ class createDrugView(LoginRequiredMixin, View):
             form = DrugInventoryForm(instance=drug)
             return render(request,
                         self.edit_drug_template,
-                        {'form':form})
+                        {'form':form, 'drug':drug})
         form = DrugInventoryForm()
         return render(request, 
             self.template_name,
