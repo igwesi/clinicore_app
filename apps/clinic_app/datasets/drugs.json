@@ -1,4 +1,4 @@
-DRUGS = [
+[
   {
     "drug_name": "Lisinopril",
     "manufacturer": "AstraZeneca",

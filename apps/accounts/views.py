@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -9,10 +9,9 @@ from apps.clinic_app.models import Staff
 from .forms import (
     LoginForm, 
     RegisterForm, 
-    PatientForm, 
     StaffForm
 )
-
+from apps.patients.forms import PatientForm
 
 Account = get_user_model()
 
@@ -140,7 +139,9 @@ class AuthProfileSetup(View):
         form = PatientForm()
         
         if request.POST:
-            form = PatientForm(request.POST)
+            instance = get_object_or_404(Patient, account=request.user)
+            
+            form = PatientForm(request.POST, instance=instance)
             if form.is_valid():
                 form.save()
                 return redirect('dashboard')
@@ -151,7 +152,9 @@ class AuthProfileSetup(View):
     def AdminProfile(self, request):
         form = StaffForm()
         if request.POST:
-            form = StaffForm(request.POST)
+            instance = get_object_or_404(Staff, account=request.user)
+            form = StaffForm(request.POST, instance=instance)
+
             if form.is_valid():
                 form.save()
                 return redirect('dashboard')
