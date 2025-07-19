@@ -10,6 +10,9 @@ class dashboardView(View):
     queryset = Patient.objects.all()
     
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         context = []
         all_patients = Patient.objects.all()
         drugs = DrugInventory.objects.all()
@@ -23,6 +26,9 @@ class dashboardView(View):
         return render(request, 'user/staff/dashboard.html', context)    
 
 def searchPatient(request):
+    if not request.user.is_authenticated:
+            return redirect('login')
+
     if request.GET.get('patient') is not None:
         query_text = request.GET.get('patient')
             

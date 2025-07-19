@@ -18,6 +18,9 @@ from apps.clinic_app.models import Appointment
 @method_decorator(login_required, name='dispatch')
 class patientDashboard(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         user = request.user
         
         patient = get_object_or_404(
@@ -35,6 +38,9 @@ class patientDashboard(View):
 
 class searchPatient(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         query_text = request.GET['patient'] if 'patient' in request.GET else None
         
         if query_text:
@@ -48,12 +54,18 @@ class searchPatient(View):
 
 class allPatients(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         all_patients = Patient.objects.all()
         return render(request, 'user/patient/all_patients.html', {'patients': all_patients})        
 
 
 class patientDetails(View):
     def get(self, request, patient_id):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         try:
             patient = Patient.objects.get(id=patient_id)
             return render(request, 'user/patient/details.html', {'patient': patient})
@@ -65,10 +77,16 @@ class AddPatientView(View):
     template_name = 'core/patients/create-patient.html'
     
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         form = PatientForm()
         return render(request, self.template_name, {'form': form})
     
     def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
@@ -81,6 +99,9 @@ class AddPatientView(View):
 class BookAppointment(View):
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         user = request.user        
         try:
             if user.role == 'patient':
@@ -95,6 +116,9 @@ class BookAppointment(View):
             return redirect('Staff:dashboard')
     
     def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         user = request.user
         
         form   = AppointmentForm(request.POST)
@@ -113,6 +137,9 @@ class AppointmentView(View):
     template_name = 'core/appointments/list-appointments.html'
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         patient = Patient.objects.get(
             account = get_user_model().objects.get(email=request.user.email)
         )

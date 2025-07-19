@@ -136,8 +136,7 @@ class AuthRoleSelection(View):
 
 class AuthProfileSetup(View):
     
-    def PatientProfile(self, request):
-        
+    def PatientProfile(self, request):        
         user = request.user
         patient = get_object_or_404(Patient, account=Account.objects.get(email=user.email))
         form    = PatientForm(instance=patient)
@@ -153,6 +152,7 @@ class AuthProfileSetup(View):
 
     
     def AdminProfile(self, request):
+        
         user = request.user
         staff = get_object_or_404(Staff, account=Account.objects.get(email=user.email))
         print(user)

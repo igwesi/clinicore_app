@@ -35,6 +35,9 @@ class patientView(LoginRequiredMixin, View):
     template_name = 'core/patients/view-patient.html' 
     
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         patients = Patient.objects.all().order_by('id')
         return render(request,
             self.template_name,
@@ -47,6 +50,9 @@ class createPatientView(LoginRequiredMixin, generic.UpdateView):
 
     def get(self, request, slug=None):
         # Render Patient Instance Form
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         if Patient.objects.filter(pk=slug).exists():
             patient = Patient.objects.get(pk=slug)
             form_instance = EditPatientForm(instance=patient)
@@ -62,6 +68,9 @@ class createPatientView(LoginRequiredMixin, generic.UpdateView):
             {'form': form, 'user_creation':user_creation})
     
     def post(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         # Updating Patient's Record
         if Patient.objects.filter(pk=slug).exists():
             patient = Patient.objects.get(pk=slug)
@@ -85,6 +94,9 @@ class ListDrugView(LoginRequiredMixin, View):
     template_name = 'core/drugs/view-drug.html'
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         drugs = DrugInventory.objects.all()
         return render(request,
             self.template_name,
@@ -95,6 +107,9 @@ class createDrugView(LoginRequiredMixin, View):
     edit_drug_template = 'core/drugs/edit-drug.html'
 
     def get(self, request, slug=None):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         if slug != None:
             drug = DrugInventory.objects.get(pk=slug)
             form = DrugInventoryForm(instance=drug)
@@ -107,6 +122,9 @@ class createDrugView(LoginRequiredMixin, View):
             {'form': form})
     
     def post(self, request, slug=None):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         if slug != None:
             drug = DrugInventory.objects.get(pk=slug)
             form = DrugInventoryForm(request.POST, instance=drug)
@@ -126,6 +144,9 @@ class createDrugView(LoginRequiredMixin, View):
     
 class DeleteDrug(View):
     def get(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         DrugInventory.objects.get(pk=slug).delete()
         messages.success(request, "Drug Deleted Successfully")
         return redirect('list-drugs')
@@ -136,6 +157,9 @@ class AppointmentView(LoginRequiredMixin, View):
     template_name = 'core/appointments/list-appointments.html'
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         appointments = Appointment.objects.all()
 
         return render(request,
@@ -147,12 +171,18 @@ class createAppointmentView(LoginRequiredMixin, View):
     template_name = 'core/appointments/create-appointment.html'
     
     def get(self, request):    
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         form = BookingForm()
         return render(request, 
             self.template_name,
             {'form': form})
     
     def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         user = request.user
         
         patient = get_object_or_404(
@@ -178,6 +208,9 @@ class AppointmentDetailView(View):
     template_name = 'core/appointments/view-appointment.html'
 
     def get(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         appointment = Appointment.objects.get(pk=slug)
         form = AppointmentForm(instance=appointment)
         
@@ -190,6 +223,9 @@ class EditAppointmentView(View):
     edit_template = 'core/appointments/edit-appointment.html'
     
     def get(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         appointment = get_object_or_404(Appointment, pk=slug)
         form        = AppointmentForm(instance=appointment)
         
@@ -198,6 +234,9 @@ class EditAppointmentView(View):
             {'form': form})
 
     def post(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         appointment = get_object_or_404(Appointment, pk=slug)
         form        = AppointmentForm(request.POST, instance=appointment)
 
@@ -209,6 +248,9 @@ class EditAppointmentView(View):
 
 class DeleteAppointment(View):
     def get(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect('login')
+
         Appointment.objects.get(pk=slug).delete()
         messages.success(request, "Appointment Deleted Successfully")
         return redirect('appointments')
