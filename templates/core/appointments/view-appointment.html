@@ -16,9 +16,11 @@
             <h4 class="my-5"> View Appointment </h4>
             <h4> <span style="font-size:10px">- {{ request.path }}</span> </h4>
             <div class="appointment-details">
-                <p><strong>Date:</strong> {{ appointment.date }}</p>
-                <p><strong>Time:</strong> {{ appointment.time }}</p>
-                <p><strong>Patient:</strong> {{ appointment.patient.name }}</p>
+                <p><strong>Date:</strong> {{ appointment.datetime }}</p>
+                {% comment %} <p><strong>Time:</strong> {{ appointment.time }}</p> {% endcomment %}
+                <p><strong>Doctor:</strong> {{ appointment.doctor }}</p>
+                <p><strong>Patient:</strong> {{ appointment.patient }}</p>
+                <p><strong>Reason:</strong> {{ appointment.reason }}</p>
                 <p><strong>Status:</strong> {{ appointment.status }}</p>
             </div>
         </div>

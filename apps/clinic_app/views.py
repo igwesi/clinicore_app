@@ -175,14 +175,16 @@ class createAppointmentView(LoginRequiredMixin, View):
 
 
 class AppointmentDetailView(View):
-    template_name = 'core/appointments/create-appointment.html'
+    template_name = 'core/appointments/view-appointment.html'
 
     def get(self, request, slug):
         appointment = Appointment.objects.get(pk=slug)
+        form = AppointmentForm(instance=appointment)
+        
         return render(
             request,
             self.template_name,
-            {'appointment':appointment})
+            {'appointment':appointment, 'form':form})
 
 class EditAppointmentView(View):
     edit_template = 'core/appointments/edit-appointment.html'
@@ -192,7 +194,7 @@ class EditAppointmentView(View):
         form        = AppointmentForm(instance=appointment)
         
         return render(request, 
-            self.template_name,
+            self.edit_template,
             {'form': form})
 
     def post(self, request, slug):
@@ -201,8 +203,8 @@ class EditAppointmentView(View):
 
         if form.is_valid():
             form.save()
-            
-        return redirect('')    
+        
+        return redirect('view-appointment', appointment.pk)    
     
 
 class DeleteAppointment(View):

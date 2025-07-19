@@ -92,20 +92,12 @@ class DrugInventoryForm(forms.ModelForm):
 
 
 class AppointmentForm(forms.ModelForm):
-    doctor         = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control', 'placeholder':''}), required=True, choices=ACCOUNT_DICT())
     datetime       = forms.DateField(label="*Date", widget=forms.DateInput(attrs={'type':'date'}))
     status         = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=APPOINTMENT_STATUS)
 
     class Meta:
         model = Appointment
         fields = ["datetime", "doctor", "reason", "comment", "status"]
-    
-    # def clean_datetime(self):
-    #     datetime = self.cleaned_data.get('datetime')
-    #     if datetime < datetime.now():
-    #         raise forms.ValidationError("Appointment date and time cannot be in the past.")
-    #     return datetime
-    
 
 
 
