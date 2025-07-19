@@ -7,15 +7,6 @@ import datetime
 import calendar
 
 
-def ACCOUNT_DICT():
-    all_accounts = Staff.objects.all()
-    to_dict = []
-    for account in all_accounts:
-        to_dict.append((account.pk, account.get_fullName()))
-    return to_dict
-
-
-
 class ExpirationDateField(forms.DateField):
     """Custom form field for drug expiration dates with month/year validation"""
     
@@ -102,9 +93,7 @@ class AppointmentForm(forms.ModelForm):
 
 
 class BookingForm(forms.ModelForm):
-    doctor         = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control', 'placeholder':''}), required=True, choices=ACCOUNT_DICT())
-    
-    datetime = forms.DateField(label="*Date", widget=forms.DateInput(attrs={'type':'date'}))
+    datetime    = forms.DateField(label="*Date", widget=forms.DateInput(attrs={'type':'date'}))
     class Meta:
         model = Appointment
         fields = ['doctor', 'datetime', 'reason'] 

@@ -20,7 +20,7 @@ class PatientForm(forms.ModelForm):
     dateOfBirth     = forms.DateField(label="*Date of Birth", widget=forms.DateInput(attrs={'type':'date'}))
     gender          = forms.ChoiceField(label='*Gender', widget=forms.Select(attrs={'class':'form-control'}), choices=GENDER)
     bloodType       = forms.ChoiceField(label='*Blood Type', widget=forms.Select(attrs={'class':'form-control'}), choices=BLOOD_TYPE, required=True)
-    account         = forms.ChoiceField(label="*Patient's Email", widget=forms.Select(attrs={'class':'form-control', 'placeholder':''}), required=True, choices=ACCOUNT_DICT())
+    # account         = forms.ChoiceField(label="*Patient's Email", widget=forms.Select(attrs={'class':'form-control', 'placeholder':''}), required=True, choices=ACCOUNT_DICT())
     
     class Meta:
         model = Patient
