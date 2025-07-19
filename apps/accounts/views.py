@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from apps.clinic_app.models import Patient
-from apps.clinic_app.models import Staff
+
+from apps.clinic_app.models import Patient, Staff
 from .forms import (
     LoginForm, 
     RegisterForm, 
@@ -104,9 +104,11 @@ class logoutView(View):
     
     
 class AuthRoleSelection(View):
+    
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect('login')
+        print("Selecting Role")
         
         return render(request, 'registrations/role-selection.html')
 
@@ -114,19 +116,17 @@ class AuthRoleSelection(View):
         if not request.user.is_authenticated:
             return redirect('login')
         
-        role = request.POST.get('auth-role')
-        account = Account.objects.get(email=request.user.email)
+        role    = request.POST.get('auth-role')
+        account = get_object_or_404(Account, email=request.user.email)
+        account.role = role.lower()
+        account.save()
         
         if role == 'patient':
-            account.role = role.lower()
             Patient.objects.get_or_create(account=account)
-            account.save()
             return redirect("auth-profile-setup")
         
         if role == 'staff':
-            account.role = role.lower()
             Staff.objects.get_or_create(account=account)
-            account.save()
             return redirect('auth-profile-setup')
         
         messages.error(request, 'Invalid role selected')        
@@ -135,65 +135,60 @@ class AuthRoleSelection(View):
 
 
 class AuthProfileSetup(View):
+    
     def PatientProfile(self, request):
-        form = PatientForm()
+        
+        user = request.user
+        patient = get_object_or_404(Patient, account=Account.objects.get(email=user.email))
+        form    = PatientForm(instance=patient)
         
         if request.POST:
-            instance = get_object_or_404(Patient, account=request.user)
-            
-            form = PatientForm(request.POST, instance=instance)
+            form = PatientForm(request.POST, instance=patient)
             if form.is_valid():
                 form.save()
-                return redirect('dashboard')
+                return redirect('auth-profile-setup')     
+
             messages.error(request, form.errors)
-            
         return render(request, 'registrations/auth-profile-setup.html', {'form': form})
+
     
     def AdminProfile(self, request):
-        form = StaffForm()
+        user = request.user
+        staff = get_object_or_404(Staff, account=Account.objects.get(email=user.email))
+        print(user)
+        
+        form  = StaffForm(instance=staff)
+                
         if request.POST:
-            instance = get_object_or_404(Staff, account=request.user)
-            form = StaffForm(request.POST, instance=instance)
-
+            form = StaffForm(request.POST, instance=staff)
             if form.is_valid():
                 form.save()
-                return redirect('dashboard')
+                return redirect('auth-profile-setup')        
+
             messages.error(request, form.errors)
         return render(request, 'registrations/auth-profile-setup.html', {'form': form})
     
+    
     def get(self, request):
+
         if not request.user.is_authenticated:
             return redirect('login')
 
-        if request.user.role == 'patient':
+        user = request.user
+        if user.role == 'patient':
             return self.PatientProfile(request)
         
-        elif request.user.role == 'staff':
+        if user.role == 'staff':
             return self.AdminProfile(request)
-        
         return redirect('auth-role-selection')
-    
+
     def post(self, request):
         if not request.user.is_authenticated:
             return redirect('login')
-
-        if request.user.role == 'patient':
-            form = PatientForm(request.POST)
-            
-            if form.is_valid():
-                instance = form.save(commit=False)
-                instance.account = request.user
-                instance.save()
-                return redirect('dashboard')        
-
-        if request.user.role == 'staff':
-            form = StaffForm(request.POST)
-
-            if form.is_valid():
-                instance = form.save(commit=False)
-                instance.account = request.user
-                instance.save()
-                return redirect('dashboard')
-
-        messages.error(request, form.errors)    
-        return redirect('dashboard')
+        user = request.user        
+        if user.role == 'patient':
+            return self.PatientProfile(request)
+        if user.role == 'staff':
+            return self.AdminProfile(request)
+        else:
+            return redirect('dashboard')

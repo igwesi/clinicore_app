@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View, generic
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from apps.patients.models import Patient
+from apps.accounts.models import Account
+from apps.staff.models import Staff
 
 
 from apps.accounts.forms import (
@@ -15,7 +17,8 @@ from .forms import (
     PatientForm,
     AppointmentForm,
     EditPatientForm,
-    DrugInventoryForm
+    DrugInventoryForm,
+    BookingForm,
 )
 
 from .models import DrugInventory, Appointment
@@ -134,47 +137,76 @@ class AppointmentView(LoginRequiredMixin, View):
 
     def get(self, request):
         appointments = Appointment.objects.all()
+
         return render(request,
             self.template_name,
-            {'appointments': appointments})
+            {'appointments': appointments})        
+        
 
 class createAppointmentView(LoginRequiredMixin, View):
     template_name = 'core/appointments/create-appointment.html'
-    edit_template = 'core/appointments/edit-appointment.html'
-
-    def get(self, request, slug=None):
-        if slug != None:
-            appointment = Appointment.objects.get(pk=slug)
-            form = AppointmentForm(instance=appointment)
-            return render(request,
-                        self.edit_template,
-                        {'form':form, 'appointment':appointment})
-        form = AppointmentForm()
+    
+    def get(self, request):    
+        form = BookingForm()
         return render(request, 
             self.template_name,
             {'form': form})
     
-    def post(self, request, slug=None):
-        if slug != None:
-            appointment = Appointment.objects.get(pk=slug)
-            form = AppointmentForm(request.POST, instance=appointment)
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Appointment Updated Successfully")
-                return redirect('list-appointments')
-        else:
-            form = AppointmentForm(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Appointment Created Successfully")
-                return redirect('list-appointments')
+    def post(self, request):
+        user = request.user
+        
+        patient = get_object_or_404(
+            Patient, account=Account.objects.get(email=user.email))
 
-        messages.error(request, form.errors)
-        return redirect('create-appointment')
+        doctor = request.POST['doctor']        
+        datetime = request.POST['datetime']
+        reason = request.POST['reason']
+
+        doctor_obj = Staff.objects.get(pk=doctor)        
+        instance = Appointment.objects.create(
+            doctor=doctor_obj,
+            patient=patient,
+            reason=reason,
+            datetime=datetime
+        )        
+        instance.save()
+        messages.success(request, "Appointment Created Successfully")                
+        return redirect('view-appointment', instance.pk)
+
+
+class AppointmentDetailView(View):
+    template_name = 'core/appointments/create-appointment.html'
+
+    def get(self, request, slug):
+        appointment = Appointment.objects.get(pk=slug)
+        return render(
+            request,
+            self.template_name,
+            {'appointment':appointment})
+
+class EditAppointmentView(View):
+    edit_template = 'core/appointments/edit-appointment.html'
+    
+    def get(self, request, slug):
+        appointment = get_object_or_404(Appointment, pk=slug)
+        form        = AppointmentForm(instance=appointment)
+        
+        return render(request, 
+            self.template_name,
+            {'form': form})
+
+    def post(self, request, slug):
+        appointment = get_object_or_404(Appointment, pk=slug)
+        form        = AppointmentForm(request.POST, instance=appointment)
+
+        if form.is_valid():
+            form.save()
+            
+        return redirect('')    
     
 
 class DeleteAppointment(View):
     def get(self, request, slug):
         Appointment.objects.get(pk=slug).delete()
         messages.success(request, "Appointment Deleted Successfully")
-        return redirect('list-appointments')
+        return redirect('appointments')

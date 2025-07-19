@@ -6,8 +6,10 @@ from .views import (
     ListDrugView,
     DeleteDrug,
     createDrugView,
-    
+        
     AppointmentView,
+    AppointmentDetailView,
+    EditAppointmentView,
     DeleteAppointment,
     createAppointmentView,
 )
@@ -24,8 +26,11 @@ urlpatterns = [
     path('drug/<slug:slug>/delete/', DeleteDrug.as_view(), name="delete-drug"),
     
     path('appointments/', AppointmentView.as_view(), name='appointments'),
-    path('appointment/<slug:slug>/view/', AppointmentView.as_view(), name='view-appointment'),
-    path('appointment/<slug:slug>/edit/', createAppointmentView.as_view(), name='edit-appointment'),
+    
+    path('appointment/<slug:slug>/view/', AppointmentDetailView.as_view(), name='view-appointment'),
+    path('appointment/<slug:slug>/edit/', EditAppointmentView.as_view(), name='edit-appointment'),
+    
     path('appointment/<slug:slug>/delete/', DeleteAppointment.as_view(), name='delete-appointment'),
-    path('appointment/create/', createAppointmentView.as_view(), name='create-appointment'),
+    
+    path('appointment/book/', createAppointmentView.as_view(), name='create-appointment'),
 ]

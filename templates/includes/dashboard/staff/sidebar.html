@@ -3,13 +3,12 @@
     <div class="scrollbar-inner sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="{% static 'theme/assets/img/profile.jpg' %}">
+                <img src="{% static 'images/auth_2.png' %}" alt="user"/>
             </div>
             <div class="info">
                 <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                     <span>
                         {{ request.user |truncatechars:10 }}
-
                         {% if request.user.role == 'staff' %}
                         <span class="user-level text-uppercase">Staff</span>
                         {% else %}

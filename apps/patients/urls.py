@@ -10,4 +10,6 @@ urlpatterns = [
     path('all_patients/', allPatients.as_view(), name='all_patients'),
     path('search-patient', searchPatient.as_view(), name='search_patient'),
     path('info/<uuid:patient_id>/', patientDetails.as_view(), name='patient_detail'),
+    
+    path('appointments/', AppointmentView.as_view(), name='list_appointments'),
 ]

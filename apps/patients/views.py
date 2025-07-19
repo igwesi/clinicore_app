@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -18,7 +18,19 @@ from apps.clinic_app.models import Appointment
 @method_decorator(login_required, name='dispatch')
 class patientDashboard(View):
     def get(self, request):
-        return render(request, 'user/patient/dashboard.html')
+        user = request.user
+        
+        patient = get_object_or_404(
+            Patient, 
+            account=get_user_model().objects.get(email=user.email)
+        )
+        
+        appointments = Appointment.objects.filter(
+            patient = patient
+        )
+        
+        return render(request, 'user/patient/dashboard.html', 
+                        context={'appointments':appointments})
     
 
 class searchPatient(View):
@@ -94,3 +106,21 @@ class BookAppointment(View):
             appointment.save()
         
         return render(request, 'user/book_appointment.html', {'form': form})
+    
+
+
+class AppointmentView(View):
+    template_name = 'core/appointments/list-appointments.html'
+
+    def get(self, request):
+        patient = Patient.objects.get(
+            account = get_user_model().objects.get(email=request.user.email)
+        )
+        
+        appointments = Appointment.objects.filter(
+            patient=patient
+        )
+
+        return render(request,
+            self.template_name,
+            {'appointments': appointments})        

@@ -27,7 +27,6 @@
 
 			<nav class="navbar navbar-header navbar-expand-lg">
 				<div class="container-fluid">
-					
 					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
 						<div class="input-group">
 							<input type="text" placeholder="Search ..." class="form-control">
@@ -50,6 +49,7 @@
 								<a class="dropdown-item" href="#">Something else here</a>
 							</div>
 						</li>
+
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-bell"></i>
@@ -80,23 +80,32 @@
 
 						<li class="nav-item dropdown">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> 
-                                <img src="{% static 'theme/assets/img/profile.jpg' %}" alt="user-img" width="36" class="img-circle">
+								{% if request.user.role == 'staff' %}
+									<img src="{% static 'images/auth_2.png' %}" alt="user" width="36"/>
+								{% else %}
+									<img src="{% static 'theme/assets/img/profile.jpg' %}" alt="user" width="36"/>
+								{% endif %}
                                 <span class="text-uppercase fw-bold">
 									{{ request.user |truncatechars:2 }}
 								</span></span> 
                             </a>
+
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
 										<div class="u-img">
+											{% if request.user.role == 'staff' %}
+                                            <img src="{% static 'images/auth_2.png' %}" alt="user"/>
+											{% else %}
                                             <img src="{% static 'theme/assets/img/profile.jpg' %}" alt="user"/>
+											{% endif %}
                                         </div>
 										<div class="u-text">
 											<h4 class="text-uppercase fw-bold">
 												{{ request.user |truncatechars:2 }}
 											</h4>											
 											<p class="text-muted">{{ request.user }}</p>
-                                            <a href="#profile" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                            <a href="{% url 'auth-profile-setup' %}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
 										</div>
 									</li>
 									<div class="dropdown-divider"></div>
@@ -106,23 +115,25 @@
 									<a class="dropdown-item" href="#"><i class="ti-settings"></i> Account Setting</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logout</a>
-								</ul>
-								<!-- /.dropdown-user -->
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-
-			{% if request.user.role == 'staff' %}
-			{% include "includes/dashboard/staff/sidebar.html" %}
-			{% else %}
-			{% include "includes/dashboard/patient/sidebar.html" %}
-			{% endif %}
-
-			{% block content %}{% endblock %}
-			<div class="row"></div>
+								<li>
+							</ul>
+							<!-- /.dropdown-user -->
+						</li>
+					</ul>
+				</div>
+			</nav>
 		</div>
+
+		<!-- SIDE BAR NAVIGATION -->
+		{% if request.user.role == 'staff' %}
+		{% include "includes/dashboard/staff/sidebar.html" %}
+		{% else %}
+		{% include "includes/dashboard/patient/sidebar.html" %}
+		{% endif %}
+		<!-- SIDE BAR NAVIGATION -->
+
+		{% block content %}{% endblock %}
+		<div class="row"></div>
 	</div>
 
 	<!-- Modal -->

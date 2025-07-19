@@ -52,10 +52,10 @@
             </li>
 
             <li class="nav-item {% if 'appointment' in request.path %}active{% endif %}">
-                <a href="{% url 'appointments' %}">
+                <a href="{% url 'Patient:list_appointments' %}">
                     <i class="la la la-users"></i>
                     <p>Appointments</p>
-                    <span class="badge badge-danger">25</span>
+                    <span class="badge badge-danger">{{ appointments | length }}</span>
                 </a>
             </li>
 

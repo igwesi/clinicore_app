@@ -4,41 +4,40 @@
 
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
-{% block title %} - Login {% endblock %}
+{% block title %} - Account Role {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="row mb-2">
-        <div class="col-12 bg-light shadow p-4">
-            <div class="brand-container">
-                <img width="10%" src="{% static 'images/aui-logo.png' %}" alt="Augustine University Logo" class="img-fluid"/>
-                <h4 class="login-account-text">Choose Account Role</h4>
+    <div class="row d-flex justify-content-center">
+        
+        <div class="col-10 col-md-4 bg-light p-2 rounded-md-start">
+            <div class="h-100 d-flex justify-content-center align-items-center">
+                <img width="30%" src="{% static 'images/aui-logo.png' %}" alt="Augustine University Logo" class="img-fluid"/>
             </div>
         </div>
-    </div>
 
-    <div class="row gap-3">
-        <div class="col-12 col-md-4">
-            <form method="POST">{% csrf_token %}
-                <div class="mb-3">
-                    <label for="auth-role-field" class="form-label text-danger">Role</label>
+        <div class="col-10 col-md-4 bg-light p-2 rounded-md-end">
+            <form method="POST" class="h-100 d-flex flex-column justify-content-center align-items-center">{% csrf_token %}
+                <div class="d-flex flex-column justify-content-center align-items-center mb-3">
+                    <label for="auth-role-field" class="form-label login-account-text">Choose Account Role</label>
+                    <p class="badge bg-secondary p-2"><small>Note: This can only be set once</small></p>
                     <select
-                        class="form-select form-select-lg"
+                        class="form-select form-select-md w-75"
                         name="auth-role"
                         id="auth-role">
-                        <option selected>Select one</option>
+                        <option selected>Select Role</option>
                         <option value="staff">Staff</option>
                         <option value="patient">Patient</option>
                     </select>
                 </div>
                 <button
                     type="submit"
-                    class="btn btn-danger">
-                    Submit
+                    class="btn btn-danger w-50">
+                    Next
                 </button>
             </form>
         </div>
-    </div>
-</div>
 
+    </div>
+</div>  
 {% endblock %}

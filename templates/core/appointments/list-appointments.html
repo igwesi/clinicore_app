@@ -31,9 +31,9 @@
                         <td>{{ appointment.datetime }}</td>
                         <td>{{ appointment.status }}</td>
                         <td>
-                            <a href="{% url 'view-appointment' appointment.slug %}" class="btn btn-info">View</a>
-                            <a href="{% url 'edit-appointment' appointment.slug %}" class="btn btn-warning">Edit</a>
-                            <a href="{% url 'delete-appointment' appointment.slug %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'view-appointment' appointment.pk %}" class="btn btn-info">View</a>
+                            <a href="{% url 'edit-appointment' appointment.pk %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'delete-appointment' appointment.pk %}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

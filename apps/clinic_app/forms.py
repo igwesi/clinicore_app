@@ -1,10 +1,20 @@
 from django import forms
 from apps.patients.models import Patient
-from .models import Appointment, DrugInventory
+from .models import Appointment, DrugInventory, Staff, APPOINTMENT_STATUS
 from django import forms
 from django.core.exceptions import ValidationError
 import datetime
 import calendar
+
+
+def ACCOUNT_DICT():
+    all_accounts = Staff.objects.all()
+    to_dict = []
+    for account in all_accounts:
+        to_dict.append((account.pk, account.get_fullName()))
+    return to_dict
+
+
 
 class ExpirationDateField(forms.DateField):
     """Custom form field for drug expiration dates with month/year validation"""
@@ -71,12 +81,6 @@ class EditPatientForm(forms.ModelForm):
         fields = ["firstName", "lastName", "bloodType", "gender", "contact" , "allergy"]
         
         
-class AppointmentForm(forms.ModelForm):
-    class Meta:
-        model = Appointment
-        fields = ["doctor", "reason", "status", "comment", "datetime"]
-
-
 class DrugInventoryForm(forms.ModelForm):
     expiration_date = ExpirationDateField(
         label="Expiration Date",
@@ -88,12 +92,27 @@ class DrugInventoryForm(forms.ModelForm):
 
 
 class AppointmentForm(forms.ModelForm):
+    doctor         = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control', 'placeholder':''}), required=True, choices=ACCOUNT_DICT())
+    datetime       = forms.DateField(label="*Date", widget=forms.DateInput(attrs={'type':'date'}))
+    status         = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=APPOINTMENT_STATUS)
+
     class Meta:
         model = Appointment
-        fields = ["doctor", "reason", "status", "comment", "datetime"]
+        fields = ["datetime", "doctor", "reason", "comment", "status"]
     
-    def clean_datetime(self):
-        datetime = self.cleaned_data.get('datetime')
-        if datetime < datetime.now():
-            raise forms.ValidationError("Appointment date and time cannot be in the past.")
-        return datetime
+    # def clean_datetime(self):
+    #     datetime = self.cleaned_data.get('datetime')
+    #     if datetime < datetime.now():
+    #         raise forms.ValidationError("Appointment date and time cannot be in the past.")
+    #     return datetime
+    
+
+
+
+class BookingForm(forms.ModelForm):
+    doctor         = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control', 'placeholder':''}), required=True, choices=ACCOUNT_DICT())
+    
+    datetime = forms.DateField(label="*Date", widget=forms.DateInput(attrs={'type':'date'}))
+    class Meta:
+        model = Appointment
+        fields = ['doctor', 'datetime', 'reason'] 

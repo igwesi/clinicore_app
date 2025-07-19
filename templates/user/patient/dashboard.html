@@ -18,12 +18,13 @@
 								</div>
 								<div class="col-7 d-flex align-items-center">
 									<div class="numbers">
-										<p class="card-category">Appointments</p>
-										<h4 class="card-title">13</h4>
+										<p class="card-category">Appointment(s)</p>
+										<h4 class="card-title">{{ appointments | length }}</h4>
 									</div>
 								</div>
 							</div>
 						</div>
+						<a class="btn btn-dark" href="{% url 'create-appointment' %}"> Book Appointment </a>
 					</div>
 				</div>
 			</div>

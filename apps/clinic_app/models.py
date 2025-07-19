@@ -4,18 +4,24 @@ from django.utils import timezone
 from apps.patients.models import Patient
 from apps.staff.models import Staff
 
+
+APPOINTMENT_STATUS = [
+    ('scheduled', 'scheduled'),
+    ('cancelled', 'cancelled'),
+    ('completed', 'completed')
+
+]
+
 class Appointment(models.Model):
     patient     = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor      = models.ForeignKey(Staff, on_delete=models.CASCADE)
     
     reason      = models.TextField(blank=True)
-    status      = models.CharField(max_length=20, choices=[
-                        ('scheduled', 'scheduled'),
-                        ('cancelled', 'cancelled'),
-                        ('completed', 'completed')
-                ], default='scheduled')
+    
+    status      = models.CharField(max_length=20, choices=APPOINTMENT_STATUS, default='scheduled')
+    
     comment     = models.TextField(blank=True)
-    datetime    = models.DateTimeField()
+    datetime    = models.DateField()
     
     class Meta:
         verbose_name = 'Appointment'

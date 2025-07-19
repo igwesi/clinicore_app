@@ -13,7 +13,7 @@ class Account(AbstractUser):
     last_name   = None
     
     email       = models.EmailField(unique=True, primary_key=True)
-    role        = models.CharField(max_length=30, choices=ROLES)
+    role        = models.CharField(max_length=30, choices=ROLES, default="staff")
 
     is_active   = models.BooleanField(default=True)    
     last_login   = models.DateTimeField(null=True, blank=True)

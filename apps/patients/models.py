@@ -5,7 +5,6 @@ from django.contrib.auth import get_user_model
 GENDER = (
     ('M', 'Male'),
     ('F', 'Female'),
-    ('N', 'Prefer not to say')
 )
 BLOOD_TYPE = (
     ('A', 'A'),
@@ -47,7 +46,6 @@ class MedicalRecord(models.Model):
     patient = models.ForeignKey(
         Patient, on_delete=models.CASCADE
     )
-    
     staff = models.ForeignKey(
         'staff.Staff', on_delete=models.CASCADE
     )

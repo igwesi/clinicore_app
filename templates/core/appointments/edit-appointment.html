@@ -12,7 +12,20 @@
 {% block core %}
 <div class="container-fluid">
     <div class="row w-100">
+        <div class="col-12">
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-md btn-danger btn-block" style="width:100%; background:#936251; border-color:#936251;">
+                        Continue
+                    </button>
+                </div>
+                {% endbuttons %}
 
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
